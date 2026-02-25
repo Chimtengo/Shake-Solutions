@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <body className="relative overflow-x-hidden">
         <Navbar />
         <Watermark />
-        <main className="pt-24 relative z-10">
+        <main className="pt-[104px] relative z-10">
           {children}
         </main>
         <Footer />
