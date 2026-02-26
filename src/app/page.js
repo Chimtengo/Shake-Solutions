@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import ClientsMarquee from '@/components/ClientsMarquee'
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -127,25 +128,32 @@ export default function HomePage() {
     {
       title: 'Proven Track Record',
       desc: '10 years of delivering exceptional IT solutions across Malawi',
-      icon: '🏆'
+      icon: '*',
+      iconSrc: '/images/why-choose/proven-track-record.png',
+      iconAlt: 'Proven Track Record icon'
     },
     {
       title: 'Expert Team',
       desc: 'Skilled professionals in development, networking, design, and support',
-      icon: '👥'
+      icon: '*',
+      iconSrc: '/images/why-choose/expert-team.png',
+      iconAlt: 'Expert Team icon'
     },
     {
       title: 'Affordable Pricing',
       desc: 'Competitive rates without compromising on quality',
-      icon: '💰'
+      icon: '*',
+      iconSrc: '/images/why-choose/affordable-pricing.png',
+      iconAlt: 'Affordable Pricing icon'
     },
     {
       title: 'Certified Vendor',
       desc: 'SNDP-accredited for .mw domain registration',
-      icon: '✅'
+      icon: '*',
+      iconSrc: '/images/why-choose/certified-vendor.png',
+      iconAlt: 'Certified Vendor icon'
     }
   ]
-
   return (
     <>
       {/* Hero Section with Sliding Background Images */}
@@ -224,6 +232,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      
+
       <section ref={sectionRef} className="max-w-7xl mx-auto px-6 py-24">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isVisible ? { opacity: 1, y: 0 } : {}} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-[var(--brand-dark)] mb-4">
@@ -277,8 +287,18 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {whyChooseUs.map((item, idx) => (
               <motion.div key={idx} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} className="card p-8 text-center group hover:border-[var(--brand-accent)] hover:border-2 transition-all duration-300">
-                <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {item.icon}
+                <div className="mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                  {item.iconSrc ? (
+                    <Image
+                      src={item.iconSrc}
+                      alt={item.iconAlt || item.title}
+                      width={72}
+                      height={72}
+                      className="h-[72px] w-[72px] object-contain"
+                    />
+                  ) : (
+                    <span className="text-6xl">{item.icon}</span>
+                  )}
                 </div>
                 <h3 className="text-xl font-bold text-[var(--brand-dark)] mb-3 group-hover:text-[var(--brand-accent)] transition-colors">
                   {item.title}
@@ -289,6 +309,17 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+
+
+
+
+
+<ClientsMarquee />
+
+
+
+
 
       <section className="max-w-7xl mx-auto px-6 py-24">
         <div className="text-center mb-16">
