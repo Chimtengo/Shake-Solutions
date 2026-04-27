@@ -1,11 +1,12 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 export default function Navbar() {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [showTopBar, setShowTopBar] = useState(true)
   const myAccountHref = 'https://www.shakesolutions.net/billing/register.php'
 
   const navLinks = [
@@ -48,9 +49,24 @@ export default function Navbar() {
     setIsMobileMenuOpen(false)
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowTopBar(window.scrollY <= 8)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-white shadow-lg">
-      <div className="bg-[var(--brand-dark)] border-b border-white/10">
+      <div
+        className={`bg-[var(--brand-dark)] border-b border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${
+          showTopBar ? 'max-h-16 opacity-100' : 'max-h-0 opacity-0 border-b-0'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between gap-3 text-xs sm:text-sm text-white/90">
           <a
             href="mailto:sales@shakesolutions.net"

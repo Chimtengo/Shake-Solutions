@@ -63,6 +63,13 @@ export default function ServicesPage() {
       description: 'Free 24/7 online support for everyone. Our dedicated team attends to all help requests and finds the best solutions for you.',
       features: ['24/7 Availability', 'Technical Assistance', 'Remote Support', 'Priority Response'],
       color: 'from-indigo-500 to-blue-500'
+    },
+    {
+      icon: 'ðŸ“¹',
+      title: 'CCTV Installation',
+      description: 'Professional CCTV installation services for homes, offices, and commercial spaces, helping you monitor and protect what matters most.',
+      features: ['Site Assessment', 'Camera Installation', 'Remote Monitoring Setup', 'Maintenance & Support'],
+      color: 'from-slate-600 to-zinc-800'
     }
   ]
 

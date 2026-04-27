@@ -157,6 +157,7 @@ export default function PricingPage() {
       ],
       popular: false
     },
+    
     {
       name: 'SEO Standard',
       price: 'MK 70,000',
