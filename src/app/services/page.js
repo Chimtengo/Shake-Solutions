@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import PageHeader from '@/components/PageHeader'
 
@@ -23,53 +24,53 @@ export default function ServicesPage() {
 
   const services = [
     {
-      icon: '💻',
+      imageSrc: '/images/services/web-system-development-placeholder.jpg',
+      imageAlt: 'Web and system development placeholder image',
       title: 'Web & System Development',
       description: 'We develop state-of-the-art systems per user requirements. Expert in all languages including CSS, Bootstrap, HTML, PHP, WordPress, and ASP.Net with SQL or MySQL as backend database.',
-      features: ['Custom Web Applications', 'E-commerce Solutions', 'Content Management Systems', 'API Development'],
-      color: 'from-blue-500 to-cyan-500'
+      features: ['Custom Web Applications', 'E-commerce Solutions', 'Content Management Systems', 'API Development']
     },
     {
-      icon: '🌐',
+      imageSrc: '/images/services/networking-solutions-placeholder.jpg',
+      imageAlt: 'Networking solutions placeholder image',
       title: 'Networking Solutions',
       description: 'Comprehensive solutions for Local and Wide Area Networks (LAN, WAN) and Remote Access, plus virtualization in Windows Server 2012 and Linux environments.',
-      features: ['Network Design & Setup', 'VPN Configuration', 'Server Management', 'Network Security'],
-      color: 'from-green-500 to-emerald-500'
+      features: ['Network Design & Setup', 'VPN Configuration', 'Server Management', 'Network Security']
     },
     {
-      icon: '🖥️',
+      imageSrc: '/images/services/web-hosting-services-placeholder.jpg',
+      imageAlt: 'Web hosting services placeholder image',
       title: 'Web Hosting Services',
       description: 'Competitive website and email hosting at affordable prices. As an SNDP-accredited vendor, we are certified for .mw domain registration.',
-      features: ['Shared Hosting', 'VPS Hosting', 'Domain Registration', '99.9% Uptime Guarantee'],
-      color: 'from-purple-500 to-pink-500'
+      features: ['Shared Hosting', 'VPS Hosting', 'Domain Registration', '99.9% Uptime Guarantee']
     },
     {
-      icon: '📈',
+      imageSrc: '/images/services/digital-marketing-placeholder.jpg',
+      imageAlt: 'Digital marketing placeholder image',
       title: 'Digital Marketing',
       description: 'Expert team organizing and implementing strategies to optimize website ranking and boost your online presence to reach target audiences.',
-      features: ['SEO Optimization', 'Social Media Marketing', 'Content Strategy', 'Analytics & Reporting'],
-      color: 'from-orange-500 to-red-500'
+      features: ['SEO Optimization', 'Social Media Marketing', 'Content Strategy', 'Analytics & Reporting']
     },
     {
-      icon: '🎨',
+      imageSrc: '/images/services/graphics-designing-placeholder.jpg',
+      imageAlt: 'Graphics designing placeholder image',
       title: 'Graphics Designing',
       description: 'Professional design solutions bringing your ideas to life. From logos to websites and social media graphics, our skilled team delivers excellence.',
-      features: ['Logo Design', 'Brand Identity', 'Social Media Graphics', 'Print Design'],
-      color: 'from-pink-500 to-rose-500'
+      features: ['Logo Design', 'Brand Identity', 'Social Media Graphics', 'Print Design']
     },
     {
-      icon: '🎧',
+      imageSrc: '/images/services/customer-support-placeholder.jpg',
+      imageAlt: 'Customer support placeholder image',
       title: 'Customer Support',
       description: 'Free 24/7 online support for everyone. Our dedicated team attends to all help requests and finds the best solutions for you.',
-      features: ['24/7 Availability', 'Technical Assistance', 'Remote Support', 'Priority Response'],
-      color: 'from-indigo-500 to-blue-500'
+      features: ['24/7 Availability', 'Technical Assistance', 'Remote Support', 'Priority Response']
     },
     {
-      icon: 'ðŸ“¹',
+      imageSrc: '/images/services/cctv-installation-placeholder.jpg',
+      imageAlt: 'CCTV installation placeholder image',
       title: 'CCTV Installation',
       description: 'Professional CCTV installation services for homes, offices, and commercial spaces, helping you monitor and protect what matters most.',
-      features: ['Site Assessment', 'Camera Installation', 'Remote Monitoring Setup', 'Maintenance & Support'],
-      color: 'from-slate-600 to-zinc-800'
+      features: ['Site Assessment', 'Camera Installation', 'Remote Monitoring Setup', 'Maintenance & Support']
     }
   ]
 
@@ -128,14 +129,20 @@ export default function ServicesPage() {
               whileHover={{ y: -8 }}
               className="card p-8 group cursor-pointer"
             >
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                {service.icon}
+              <div className="mb-6 overflow-hidden rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                <Image
+                  src={service.imageSrc}
+                  alt={service.imageAlt}
+                  width={640}
+                  height={360}
+                  className="h-40 w-full object-cover"
+                />
               </div>
-              
+
               <h3 className="text-2xl font-bold text-[var(--brand-dark)] mb-4 group-hover:text-[var(--brand-accent)] transition-colors">
                 {service.title}
               </h3>
-              
+
               <p className="text-slate-600 mb-6 leading-relaxed">
                 {service.description}
               </p>

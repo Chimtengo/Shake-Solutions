@@ -10,6 +10,7 @@ export default function Navbar() {
   const myAccountHref = 'https://www.shakesolutions.net/billing/register.php'
 
   const navLinks = [
+    { name: 'Home', href: '/' },
     { name: 'About Shakes', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Portfolio', href: '/portfolio' },

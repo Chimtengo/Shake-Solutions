@@ -7,7 +7,10 @@ import ClientsMarquee from '@/components/ClientsMarquee'
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [domainName, setDomainName] = useState('')
+  const [domainTld, setDomainTld] = useState('.com')
   const sectionRef = useRef(null)
+  const domainSearchBaseUrl = 'https://www.shakesolutions.net/billing/cart.php?a=add&domain=register'
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,37 +62,43 @@ export default function HomePage() {
 
   const services = [
     {
-      icon: '💻',
+      imageSrc: '/images/services/web-system-development-placeholder.jpg',
+      imageAlt: 'Web and system development service image',
       title: 'Web & System Development',
       description: 'Custom web applications and systems built with the latest technologies including HTML, PHP, WordPress, and ASP.Net.',
       link: '/services'
     },
     {
-      icon: '🌐',
+      imageSrc: '/images/services/networking-solutions-placeholder.jpg',
+      imageAlt: 'Networking solutions service image',
       title: 'Networking Solutions',
       description: 'Complete LAN, WAN, and virtualization solutions for Windows Server and Linux environments.',
       link: '/services'
     },
     {
-      icon: '🖥️',
+      imageSrc: '/images/services/web-hosting-services-placeholder.jpg',
+      imageAlt: 'Web hosting service image',
       title: 'Web Hosting',
       description: 'Reliable hosting with 0% downtime, free SSL, and .mw domain registration as an SNDP-accredited vendor.',
       link: '/services'
     },
     {
-      icon: '📈',
+      imageSrc: '/images/services/digital-marketing-placeholder.jpg',
+      imageAlt: 'Digital marketing service image',
       title: 'Digital Marketing',
       description: 'SEO optimization, social media marketing, and strategies to boost your online presence.',
       link: '/services'
     },
     {
-      icon: '🎨',
+      imageSrc: '/images/services/graphics-designing-placeholder.jpg',
+      imageAlt: 'Graphics design service image',
       title: 'Graphics Design',
       description: 'Professional logos, branding, and social media graphics that bring your ideas to life.',
       link: '/services'
     },
     {
-      icon: '🎧',
+      imageSrc: '/images/services/customer-support-placeholder.jpg',
+      imageAlt: 'Customer support service image',
       title: '24/7 Customer Support',
       description: 'Free round-the-clock support for all clients with dedicated assistance and rapid response.',
       link: '/services'
@@ -129,31 +138,52 @@ export default function HomePage() {
       title: 'Proven Track Record',
       desc: '10 years of delivering exceptional IT solutions across Malawi',
       icon: '*',
-      iconSrc: '/images/why-choose/proven-track-record.png',
+      iconSrc: '/images/why-choose/proven-track-record.svg',
       iconAlt: 'Proven Track Record icon'
     },
     {
       title: 'Expert Team',
       desc: 'Skilled professionals in development, networking, design, and support',
       icon: '*',
-      iconSrc: '/images/why-choose/expert-team.png',
+      iconSrc: '/images/why-choose/expert-team.svg',
       iconAlt: 'Expert Team icon'
     },
     {
       title: 'Affordable Pricing',
       desc: 'Competitive rates without compromising on quality',
       icon: '*',
-      iconSrc: '/images/why-choose/affordable-pricing.png',
+      iconSrc: '/images/why-choose/affordable-pricing.svg',
       iconAlt: 'Affordable Pricing icon'
     },
     {
       title: 'Certified Vendor',
       desc: 'SNDP-accredited for .mw domain registration',
       icon: '*',
-      iconSrc: '/images/why-choose/certified-vendor.png',
+      iconSrc: '/images/why-choose/certified-vendor.svg',
       iconAlt: 'Certified Vendor icon'
     }
   ]
+
+  const domainExtensions = ['.com', '.net', '.org', '.mw', '.co.mw', '.org.mw', '.shop', '.africa']
+
+  const handleDomainSearch = (event) => {
+    event.preventDefault()
+
+    const sanitizedName = domainName
+      .trim()
+      .toLowerCase()
+      .replace(/^https?:\/\//, '')
+      .replace(/^www\./, '')
+      .split('/')[0]
+      .split('.')[0]
+      .replace(/[^a-z0-9-]/g, '')
+
+    if (!sanitizedName) return
+
+    const searchUrl = `${domainSearchBaseUrl}&sld=${encodeURIComponent(sanitizedName)}&tld=${encodeURIComponent(domainTld)}`
+    window.open(searchUrl, '_blank', 'noopener,noreferrer')
+  }
+
   return (
     <>
       {/* Hero Section with Sliding Background Images */}
@@ -165,7 +195,7 @@ export default function HomePage() {
               {/* Gradient background as fallback - remove when you add images */}
               <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-dark)] via-[var(--brand-mid)] to-[var(--brand-dark)]">
                 {/* Uncomment and use your actual images */}
-                <Image src={bg} alt={`Slide ${idx + 1}`} fill className="object-cover" priority={idx === 0} /> 
+                <Image src={bg} alt={`Slide ${idx + 1}`} fill className="object-cover" priority={idx === 0} />
               </div>
               {/* Dark overlay for text readability */}
               <div className="absolute inset-0 bg-black/60"></div>
@@ -232,7 +262,61 @@ export default function HomePage() {
         </div>
       </section>
 
-      
+      <section className="bg-slate-50 py-20">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="card p-8 md:p-10">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-3">
+                Search for Your Next <span className="text-[var(--brand-accent)]">Domain</span>
+              </h2>
+              <p className="text-slate-600 max-w-2xl mx-auto">
+                Start your search here and continue to our secure billing portal to check availability and complete registration.
+              </p>
+            </div>
+
+            <form onSubmit={handleDomainSearch} className="flex flex-col gap-4 md:flex-row md:items-center">
+              <label className="sr-only" htmlFor="domain-name">
+                Domain name
+              </label>
+              <input
+                id="domain-name"
+                type="text"
+                value={domainName}
+                onChange={(event) => setDomainName(event.target.value)}
+                placeholder="Enter your domain name"
+                className="min-w-0 flex-1 rounded-xl border border-slate-300 px-5 py-4 text-base text-[var(--brand-dark)] outline-none transition focus:border-[var(--brand-accent)] focus:ring-4 focus:ring-[var(--brand-accent)]/10"
+              />
+
+              <label className="sr-only" htmlFor="domain-tld">
+                Domain extension
+              </label>
+              <select
+                id="domain-tld"
+                value={domainTld}
+                onChange={(event) => setDomainTld(event.target.value)}
+                className="rounded-xl border border-slate-300 bg-white px-5 py-4 text-base text-[var(--brand-dark)] outline-none transition focus:border-[var(--brand-accent)] focus:ring-4 focus:ring-[var(--brand-accent)]/10"
+              >
+                {domainExtensions.map((extension) => (
+                  <option key={extension} value={extension}>
+                    {extension}
+                  </option>
+                ))}
+              </select>
+
+              <button
+                type="submit"
+                className="rounded-xl bg-[var(--brand-accent)] px-6 py-4 font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:bg-[var(--brand-accent)]/90"
+              >
+                Search Domain
+              </button>
+            </form>
+
+            <p className="mt-4 text-center text-sm text-slate-500">
+              Example: enter your company name and choose .com or .mw etc
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section ref={sectionRef} className="max-w-7xl mx-auto px-6 py-24">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isVisible ? { opacity: 1, y: 0 } : {}} className="text-center mb-16">
@@ -247,8 +331,14 @@ export default function HomePage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, idx) => (
             <motion.div key={idx} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} whileHover={{ y: -8 }} className="card p-8 group cursor-pointer">
-              <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                {service.icon}
+              <div className="mb-6 overflow-hidden rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                <Image
+                  src={service.imageSrc}
+                  alt={service.imageAlt}
+                  width={640}
+                  height={360}
+                  className="h-40 w-full object-cover"
+                />
               </div>
               <h3 className="text-xl font-bold text-[var(--brand-dark)] mb-4 group-hover:text-[var(--brand-accent)] transition-colors">
                 {service.title}
@@ -310,16 +400,7 @@ export default function HomePage() {
         </div>
       </section>
 
-
-
-
-
-
-<ClientsMarquee />
-
-
-
-
+      <ClientsMarquee />
 
       <section className="max-w-7xl mx-auto px-6 py-24">
         <div className="text-center mb-16">

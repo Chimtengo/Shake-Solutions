@@ -11,39 +11,39 @@ export default function PortfolioPage() {
 
   const projects = [
     {
-      title: 'PAMOZA TINGAKWANISKA YOUTH ORGANISATION',
+      title: 'AMOS KAMBALE',
       category: 'Web Development',
       type: 'Developed & Hosted',
-      image: '/images/portfolio/pamoza-youth.jpg',
+      image: '/images/portfolio/kambale.png',
       desc: 'Complete website solution with hosting services.'
     },
     {
-      title: 'Central Region Volleyball League',
+      title: 'KZN Printing & Package',
       category: 'Web Development',
       type: 'Developed & Hosted',
-      image: '/images/portfolio/central-region-volleyball.jpg',
+      image: '/images/portfolio/kzn.png',
       desc: 'Sports league management platform.'
     },
     {
-      title: 'Shellyz Photography',
+      title: 'SICO Holdings',
       category: 'Social Media',
       type: 'Social Media Management',
-      image: '/images/portfolio/shellyz-photography.jpg',
+      image: '/images/portfolio/sico.png',
       desc: 'Complete social media presence and branding.'
     },
     {
-      title: 'Development Centre',
+      title: 'SASO',
       category: 'Web Development',
       type: 'Developed & Hosted',
-      image: '/images/portfolio/development-centre.jpg',
+      image: '/images/portfolio/saso.png',
       desc: 'Professional corporate website.'
     },
     {
-      title: 'SICO Holdings',
+      title: 'Save the Village Youth Foundation',
       category: 'Web Development',
       type: 'Developed & Hosted',
-      image: '/images/portfolio/sico-holdings.jpg',
-      desc: 'Enterprise-level web solution.'
+      image: '/images/portfolio/save-the-village.png',
+      desc: 'a dynamic non-profit organization committed to strengthening communities and fostering sustainable development.'
     },
     {
       title: 'Tapsystylish Store',
@@ -53,10 +53,10 @@ export default function PortfolioPage() {
       desc: 'E-commerce hosting solution.'
     },
     {
-      title: 'Kids Palace',
+      title: 'Delta Trading and Investments Ltd',
       category: 'Social Media',
       type: 'Social Media Campaign',
-      image: '/images/portfolio/kids-palace.jpg',
+      image: '/images/portfolio/delta.png',
       desc: 'Educational content and engagement.'
     },
     {
@@ -74,11 +74,11 @@ export default function PortfolioPage() {
       desc: 'Social media graphics and promotional materials.'
     },
     {
-      title: 'Tommy Snacks',
+      title: 'Budget Car Hire',
       category: 'Social Media',
       type: 'Social Media Management',
-      image: '/images/portfolio/tommy-snacks.jpg',
-      desc: 'Brand awareness and customer engagement.'
+      image: '/images/portfolio/budget-car-hire.png',
+      desc: 'Find the right car for yourself.'
     },
     {
       title: 'Healthcare Platform',
