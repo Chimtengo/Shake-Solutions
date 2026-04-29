@@ -15,6 +15,9 @@ export default function PortfolioPage() {
       category: 'Web Development',
       type: 'Developed & Hosted',
       image: '/images/portfolio/kambale.png',
+      imageWidth: 1892,
+      imageHeight: 945,
+      website: 'https://amoskambale.org/',
       desc: 'Complete website solution with hosting services.'
     },
     {
@@ -22,6 +25,9 @@ export default function PortfolioPage() {
       category: 'Web Development',
       type: 'Developed & Hosted',
       image: '/images/portfolio/kzn.png',
+      imageWidth: 1881,
+      imageHeight: 934,
+      website: 'https://kznprintingmw.com/',
       desc: 'Sports league management platform.'
     },
     {
@@ -29,6 +35,9 @@ export default function PortfolioPage() {
       category: 'Social Media',
       type: 'Social Media Management',
       image: '/images/portfolio/sico.png',
+      imageWidth: 1542,
+      imageHeight: 921,
+      website: 'https://sico.mw/',
       desc: 'Complete social media presence and branding.'
     },
     {
@@ -36,6 +45,9 @@ export default function PortfolioPage() {
       category: 'Web Development',
       type: 'Developed & Hosted',
       image: '/images/portfolio/saso.png',
+      imageWidth: 1919,
+      imageHeight: 950,
+      website: '#',
       desc: 'Professional corporate website.'
     },
     {
@@ -43,6 +55,9 @@ export default function PortfolioPage() {
       category: 'Web Development',
       type: 'Developed & Hosted',
       image: '/images/portfolio/save-the-village.png',
+      imageWidth: 1891,
+      imageHeight: 941,
+      website: '#',
       desc: 'a dynamic non-profit organization committed to strengthening communities and fostering sustainable development.'
     },
     {
@@ -50,6 +65,9 @@ export default function PortfolioPage() {
       category: 'Hosting',
       type: 'Web Hosting',
       image: '/images/portfolio/tapsystylish-store.jpg',
+      imageWidth: 1600,
+      imageHeight: 1000,
+      website: '#',
       desc: 'E-commerce hosting solution.'
     },
     {
@@ -57,6 +75,9 @@ export default function PortfolioPage() {
       category: 'Social Media',
       type: 'Social Media Campaign',
       image: '/images/portfolio/delta.png',
+      imageWidth: 1895,
+      imageHeight: 949,
+      website: 'https://deltatradingmw.com/',
       desc: 'Educational content and engagement.'
     },
     {
@@ -64,6 +85,9 @@ export default function PortfolioPage() {
       category: 'Graphics',
       type: 'Graphics Design',
       image: '/images/portfolio/brand-identity-package.jpg',
+      imageWidth: 1600,
+      imageHeight: 1000,
+      website: '#',
       desc: 'Complete branding and logo design.'
     },
     {
@@ -71,6 +95,9 @@ export default function PortfolioPage() {
       category: 'Graphics',
       type: 'Graphics Design',
       image: '/images/portfolio/marketing-campaign.jpg',
+      imageWidth: 1600,
+      imageHeight: 1000,
+      website: '#',
       desc: 'Social media graphics and promotional materials.'
     },
     {
@@ -78,20 +105,29 @@ export default function PortfolioPage() {
       category: 'Social Media',
       type: 'Social Media Management',
       image: '/images/portfolio/budget-car-hire.png',
+      imageWidth: 1903,
+      imageHeight: 951,
+      website: 'https://budgetcarhiremw.net/',
       desc: 'Find the right car for yourself.'
     },
     {
-      title: 'Healthcare Platform',
+      title: 'Reach Girls',
       category: 'Web Development',
       type: 'Custom Development',
-      image: '/images/portfolio/healthcare-platform.jpg',
-      desc: 'Patient management system.'
+      image: '/images/portfolio/reach-girls.png',
+      imageWidth: 1600,
+      imageHeight: 1000,
+      website: 'https://reachgirls.org/',
+      desc: 'Motivated by the desire to create change to the girls.'
     },
     {
       title: 'Restaurant Website',
       category: 'Hosting',
       type: 'Web Hosting',
       image: '/images/portfolio/restaurant-website.jpg',
+      imageWidth: 1600,
+      imageHeight: 1000,
+      website: '#',
       desc: 'Menu management and online ordering.'
     }
   ]
@@ -135,12 +171,20 @@ export default function PortfolioPage() {
               whileHover={{ y: -8 }}
               className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition-all duration-300"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+              <div className="relative overflow-hidden bg-slate-100">
                 <Image
                   src={project.image}
                   alt={`${project.title} project image`}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={project.imageWidth}
+                  height={project.imageHeight}
+                  className="block h-auto w-full"
+                />
+                <a
+                  href={project.website}
+                  target={project.website === '#' ? undefined : '_blank'}
+                  rel={project.website === '#' ? undefined : 'noopener noreferrer'}
+                  aria-label={`Open ${project.title} website`}
+                  className="absolute inset-0 z-10"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/10 to-transparent" />
                 <span className="absolute left-4 bottom-4 inline-block rounded-full bg-white/90 text-slate-800 px-3 py-1 text-xs font-semibold backdrop-blur">

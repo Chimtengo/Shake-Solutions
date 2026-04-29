@@ -262,7 +262,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-20">
+      <section className="py-20">
         <div className="max-w-5xl mx-auto px-6">
           <div className="card p-8 md:p-10">
             <div className="text-center mb-8">
