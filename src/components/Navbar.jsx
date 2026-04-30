@@ -91,13 +91,13 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-1 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 sm:gap-3" onClick={closeMobileMenu}>
           <img 
             src="/images/logo.png" 
             alt="Shake Solutions Logo" 
-            className="h-10 sm:h-12 w-auto"
+            className="h-16 sm:h-20 w-auto"
           />
           
         </Link>
