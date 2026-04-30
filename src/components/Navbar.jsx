@@ -38,7 +38,7 @@ export default function Navbar() {
     }
   ]
   const updatesLinks = [
-    { name: 'News', href: 'https://shakesolutions.net/blog', external: true },
+    { name: 'News', href: '/news' },
     { name: 'Vacancies', href: '/vacancies' }
   ]
 

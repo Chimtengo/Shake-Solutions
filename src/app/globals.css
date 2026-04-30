@@ -23,3 +23,7 @@ body {
 .card {
   @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300;
 }
+
+.form-input {
+  @apply w-full rounded-lg border border-slate-200 px-4 py-3 text-slate-800 outline-none transition focus:border-[var(--brand-accent)] focus:ring-4 focus:ring-[var(--brand-accent)]/10;
+}

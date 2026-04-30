@@ -1,5 +1,28 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## News Admin Setup
+
+The internal news/blog pages are available at `/news` and `/news/[slug]`. Vacancy pages are available at `/vacancies` and `/vacancies/[slug]`.
+
+The admin dashboards are available at `/admin/news` and `/admin/vacancies`.
+
+To connect Supabase:
+
+1. Create a Supabase project.
+2. Run `supabase-news-setup.sql` in the Supabase SQL editor.
+3. Create an admin user in Supabase Authentication.
+4. Add these values to `.env.local`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
+
+5. Restart the dev server and sign in at `/admin/news` or `/admin/vacancies`.
+
+Until Supabase is connected, `/news` displays fallback demo articles.
+Until Supabase is connected, `/vacancies` displays fallback demo vacancies.
+
 ## Getting Started
 
 First, run the development server:
