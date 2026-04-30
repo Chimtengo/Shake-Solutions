@@ -10,7 +10,7 @@ export default function HomePage() {
   const [domainName, setDomainName] = useState('')
   const [domainTld, setDomainTld] = useState('.com')
   const sectionRef = useRef(null)
-  const domainSearchBaseUrl = 'https://www.shakesolutions.net/billing/cart.php?a=add&domain=register'
+  const domainSearchBaseUrl = 'https://www.shakesolutions.net/billing/cart.php'
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -166,23 +166,14 @@ export default function HomePage() {
 
   const domainExtensions = ['.com', '.net', '.org', '.mw', '.co.mw', '.org.mw', '.shop', '.africa']
 
-  const handleDomainSearch = (event) => {
-    event.preventDefault()
-
-    const sanitizedName = domainName
-      .trim()
-      .toLowerCase()
-      .replace(/^https?:\/\//, '')
-      .replace(/^www\./, '')
-      .split('/')[0]
-      .split('.')[0]
-      .replace(/[^a-z0-9-]/g, '')
-
-    if (!sanitizedName) return
-
-    const searchUrl = `${domainSearchBaseUrl}&sld=${encodeURIComponent(sanitizedName)}&tld=${encodeURIComponent(domainTld)}`
-    window.open(searchUrl, '_blank', 'noopener,noreferrer')
-  }
+  const sanitizedDomainName = domainName
+    .trim()
+    .toLowerCase()
+    .replace(/^https?:\/\//, '')
+    .replace(/^www\./, '')
+    .split('/')[0]
+    .split('.')[0]
+    .replace(/[^a-z0-9-]/g, '')
 
   return (
     <>
@@ -274,7 +265,10 @@ export default function HomePage() {
               </p>
             </div>
 
-            <form onSubmit={handleDomainSearch} className="flex flex-col gap-4 md:flex-row md:items-center">
+            <form action={domainSearchBaseUrl} method="get" className="flex flex-col gap-4 md:flex-row md:items-center">
+              <input type="hidden" name="a" value="add" />
+              <input type="hidden" name="domain" value="register" />
+              <input type="hidden" name="sld" value={sanitizedDomainName} />
               <label className="sr-only" htmlFor="domain-name">
                 Domain name
               </label>
@@ -284,6 +278,7 @@ export default function HomePage() {
                 value={domainName}
                 onChange={(event) => setDomainName(event.target.value)}
                 placeholder="Enter your domain name"
+                required
                 className="min-w-0 flex-1 rounded-xl border border-slate-300 px-5 py-4 text-base text-[var(--brand-dark)] outline-none transition focus:border-[var(--brand-accent)] focus:ring-4 focus:ring-[var(--brand-accent)]/10"
               />
 
@@ -292,6 +287,7 @@ export default function HomePage() {
               </label>
               <select
                 id="domain-tld"
+                name="tld"
                 value={domainTld}
                 onChange={(event) => setDomainTld(event.target.value)}
                 className="rounded-xl border border-slate-300 bg-white px-5 py-4 text-base text-[var(--brand-dark)] outline-none transition focus:border-[var(--brand-accent)] focus:ring-4 focus:ring-[var(--brand-accent)]/10"
