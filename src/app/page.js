@@ -7,7 +7,7 @@ import ClientsMarquee from '@/components/ClientsMarquee'
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [canAutoSlide, setCanAutoSlide] = useState(false)
+  const [useMobileSlides, setUseMobileSlides] = useState(true)
   const [domainName, setDomainName] = useState('')
   const [domainTld, setDomainTld] = useState('.com')
   const sectionRef = useRef(null)
@@ -28,10 +28,9 @@ export default function HomePage() {
   }, [])
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 768px)')
+    const mediaQuery = window.matchMedia('(max-width: 767px)')
     const updateSliderMode = () => {
-      setCanAutoSlide(mediaQuery.matches)
-      if (!mediaQuery.matches) setCurrentSlide(0)
+      setUseMobileSlides(mediaQuery.matches)
     }
 
     updateSliderMode()
@@ -40,22 +39,28 @@ export default function HomePage() {
     return () => mediaQuery.removeEventListener('change', updateSliderMode)
   }, [])
 
-  // Auto-slide every 6 seconds on larger screens only.
+  // Auto-slide every 6 seconds.
   useEffect(() => {
-    if (!canAutoSlide) return undefined
-
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % 3)
     }, 6000)
     return () => clearInterval(timer)
-  }, [canAutoSlide])
+  }, [])
 
-  // Hero slides - just the background images
-  const heroBackgrounds = [
+  const desktopHeroBackgrounds = [
     '/images/slide-1.jpg',
     '/images/slide-2.jpg',
     '/images/slide-3.jpg'
   ]
+
+  const mobileHeroBackgrounds = [
+    '/images/mobile/slide-1.jpg',
+    '/images/mobile/slide-2.jpg',
+    '/images/mobile/slide-3.jpg'
+  ]
+
+  // Hero slides - just the background images
+  const heroBackgrounds = useMobileSlides ? mobileHeroBackgrounds : desktopHeroBackgrounds
 
   // Messages that appear on top of sliding backgrounds
   const heroMessages = [
@@ -244,19 +249,19 @@ export default function HomePage() {
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 hidden gap-3 md:flex">
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
           {[0, 1, 2].map((idx) => (
             <button key={idx} onClick={() => setCurrentSlide(idx)} className={`h-3 rounded-full transition-all duration-300 ${currentSlide === idx ? 'bg-[var(--brand-accent)] w-12' : 'bg-white/50 w-3 hover:bg-white/80'}`} aria-label={`Slide ${idx + 1}`} />
           ))}
         </div>
 
         {/* Navigation Arrows */}
-        <button onClick={() => setCurrentSlide((prev) => (prev === 0 ? 2 : prev - 1))} className="absolute left-6 top-1/2 z-20 hidden -translate-y-1/2 transform rounded-full bg-white/10 p-4 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 md:block" aria-label="Previous slide">
+        <button onClick={() => setCurrentSlide((prev) => (prev === 0 ? 2 : prev - 1))} className="absolute left-3 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-white/10 p-3 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 md:left-6 md:p-4" aria-label="Previous slide">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <button onClick={() => setCurrentSlide((prev) => (prev + 1) % 3)} className="absolute right-6 top-1/2 z-20 hidden -translate-y-1/2 transform rounded-full bg-white/10 p-4 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 md:block" aria-label="Next slide">
+        <button onClick={() => setCurrentSlide((prev) => (prev + 1) % 3)} className="absolute right-3 top-1/2 z-20 -translate-y-1/2 transform rounded-full bg-white/10 p-3 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 md:right-6 md:p-4" aria-label="Next slide">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
