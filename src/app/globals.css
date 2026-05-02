@@ -11,12 +11,31 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   background: var(--bg-main);
   color: var(--text-main);
   font-family: ui-sans-serif, system-ui, sans-serif;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
 }
 
 /* Smooth cards */
@@ -26,4 +45,14 @@ body {
 
 .form-input {
   @apply w-full rounded-lg border border-slate-200 px-4 py-3 text-slate-800 outline-none transition focus:border-[var(--brand-accent)] focus:ring-4 focus:ring-[var(--brand-accent)]/10;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .card {
+    @apply shadow-sm transition-none;
+  }
 }
