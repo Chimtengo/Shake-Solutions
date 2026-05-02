@@ -26,8 +26,29 @@ export default function ClientsMarquee() {
         
       </div>
 
+      <div className="grid grid-cols-2 gap-6 px-6 sm:grid-cols-3 md:hidden">
+        {clientLogos.map((logo) => (
+          <div key={logo.name} className="flex h-24 items-center justify-center">
+            {failedLogos[logo.src] ? (
+              <span className="text-sm font-medium text-slate-500">{logo.name}</span>
+            ) : (
+              <Image
+                src={logo.src}
+                alt={`${logo.name} logo`}
+                width={180}
+                height={90}
+                sizes="50vw"
+                quality={70}
+                className="h-14 w-auto object-contain opacity-90"
+                onError={() => setFailedLogos((prev) => ({ ...prev, [logo.src]: true }))}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+
       <motion.div
-        className="flex w-max gap-10 px-6"
+        className="hidden w-max gap-10 px-6 md:flex"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
       >

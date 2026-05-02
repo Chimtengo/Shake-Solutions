@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import PageHeader from '@/components/PageHeader'
 
 const projects = [
@@ -138,40 +138,13 @@ const instagramSearchBaseUrl = 'https://www.instagram.com/explore/search/keyword
 
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('All')
-  const [canShowLivePreviews, setCanShowLivePreviews] = useState(false)
-  const [activePreviewTitle, setActivePreviewTitle] = useState(null)
 
   const filters = ['All', 'Web Development', 'Hosting', 'Social Media', 'Graphics']
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)')
-    const updatePreviewMode = () => {
-      setCanShowLivePreviews(mediaQuery.matches)
-      if (!mediaQuery.matches) setActivePreviewTitle(null)
-    }
-
-    updatePreviewMode()
-    mediaQuery.addEventListener('change', updatePreviewMode)
-
-    return () => mediaQuery.removeEventListener('change', updatePreviewMode)
-  }, [])
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === 'All') return projects
     return projects.filter((project) => project.category === activeFilter)
   }, [activeFilter])
-
-  const hasLivePreview = (project) => (
-    canShowLivePreviews &&
-    project.website !== '#' &&
-    activePreviewTitle === project.title
-  )
-
-  const togglePreview = (project) => {
-    setActivePreviewTitle((currentTitle) => (
-      currentTitle === project.title ? null : project.title
-    ))
-  }
 
   const getFacebookUrl = (project) => {
     if (project.facebook) return project.facebook
@@ -227,35 +200,10 @@ export default function PortfolioPage() {
                   quality={70}
                   className="absolute inset-0 h-full w-full object-cover"
                 />
-                {hasLivePreview(project) && (
-                  <>
-                    <iframe
-                      src={project.website}
-                      title={`${project.title} live website preview`}
-                      loading="lazy"
-                      className="absolute left-1/2 top-1/2 h-[160%] w-[160%] origin-center -translate-x-1/2 -translate-y-1/2 scale-[0.625] border-0 bg-white transition-transform duration-500 group-hover:scale-[0.65]"
-                    />
-                    <span
-                      aria-label="Live website preview"
-                      className="absolute right-4 top-4 z-10 h-3 w-3 rounded-full bg-emerald-500 shadow-sm ring-2 ring-white"
-                    >
-                      <span className="sr-only">Live website preview</span>
-                    </span>
-                  </>
-                )}
-                {!canShowLivePreviews && project.website !== '#' && (
+                {project.website !== '#' && (
                   <span className="absolute right-4 top-4 z-10 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur">
                     Open Website
                   </span>
-                )}
-                {canShowLivePreviews && project.website !== '#' && (
-                  <button
-                    type="button"
-                    onClick={() => togglePreview(project)}
-                    className="absolute right-4 top-4 z-20 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur transition hover:bg-white"
-                  >
-                    {activePreviewTitle === project.title ? 'Hide Preview' : 'Load Preview'}
-                  </button>
                 )}
                 <a
                   href={project.website}
