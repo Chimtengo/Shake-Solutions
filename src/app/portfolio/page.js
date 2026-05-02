@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import PageHeader from '@/components/PageHeader'
 
 const projects = [
@@ -138,15 +138,26 @@ const instagramSearchBaseUrl = 'https://www.instagram.com/explore/search/keyword
 
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('All')
+  const [canShowLivePreviews, setCanShowLivePreviews] = useState(false)
 
   const filters = ['All', 'Web Development', 'Hosting', 'Social Media', 'Graphics']
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 768px)')
+    const updatePreviewMode = () => setCanShowLivePreviews(mediaQuery.matches)
+
+    updatePreviewMode()
+    mediaQuery.addEventListener('change', updatePreviewMode)
+
+    return () => mediaQuery.removeEventListener('change', updatePreviewMode)
+  }, [])
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === 'All') return projects
     return projects.filter((project) => project.category === activeFilter)
   }, [activeFilter])
 
-  const hasLivePreview = (project) => project.website !== '#'
+  const hasLivePreview = (project) => canShowLivePreviews && project.website !== '#'
 
   const getFacebookUrl = (project) => {
     if (project.facebook) return project.facebook
@@ -215,6 +226,11 @@ export default function PortfolioPage() {
                       <span className="sr-only">Live website preview</span>
                     </span>
                   </>
+                )}
+                {!canShowLivePreviews && project.website !== '#' && (
+                  <span className="absolute right-4 top-4 z-10 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur">
+                    Open Website
+                  </span>
                 )}
                 <a
                   href={project.website}
