@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -32,9 +33,13 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <img 
-                src="/images/logo.png" 
-                alt="Shake Solutions Logo" 
+              <Image
+                src="/images/logo.png"
+                alt="Shake Solutions Logo"
+                width={180}
+                height={180}
+                sizes="60px"
+                quality={70}
                 className="h-15 w-auto"
               />
             </div>

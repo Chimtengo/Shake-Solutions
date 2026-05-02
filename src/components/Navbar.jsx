@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -94,9 +95,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-1 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 sm:gap-3" onClick={closeMobileMenu}>
-          <img 
-            src="/images/logo.png" 
-            alt="Shake Solutions Logo" 
+          <Image
+            src="/images/logo.png"
+            alt="Shake Solutions Logo"
+            width={220}
+            height={220}
+            sizes="(max-width: 640px) 64px, 80px"
+            quality={70}
             className="h-16 sm:h-20 w-auto"
           />
           

@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import Image from 'next/image'
 import PageHeader from '@/components/PageHeader'
 
 export default function AboutPage() {
@@ -87,10 +88,13 @@ export default function AboutPage() {
             className="relative"
           >
             <div className="relative h-[400px] w-full rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src="/images/company-image.jpg" 
-                alt="Shake Solutions Company" 
-                className="w-full h-full object-cover"
+              <Image
+                src="/images/company-image.jpg"
+                alt="Shake Solutions Company"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                quality={70}
+                className="object-cover"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[var(--brand-accent)]/20 rounded-full blur-3xl -z-10"></div>
