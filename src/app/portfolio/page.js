@@ -139,12 +139,16 @@ const instagramSearchBaseUrl = 'https://www.instagram.com/explore/search/keyword
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('All')
   const [canShowLivePreviews, setCanShowLivePreviews] = useState(false)
+  const [activePreviewTitle, setActivePreviewTitle] = useState(null)
 
   const filters = ['All', 'Web Development', 'Hosting', 'Social Media', 'Graphics']
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 768px)')
-    const updatePreviewMode = () => setCanShowLivePreviews(mediaQuery.matches)
+    const mediaQuery = window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)')
+    const updatePreviewMode = () => {
+      setCanShowLivePreviews(mediaQuery.matches)
+      if (!mediaQuery.matches) setActivePreviewTitle(null)
+    }
 
     updatePreviewMode()
     mediaQuery.addEventListener('change', updatePreviewMode)
@@ -157,7 +161,17 @@ export default function PortfolioPage() {
     return projects.filter((project) => project.category === activeFilter)
   }, [activeFilter])
 
-  const hasLivePreview = (project) => canShowLivePreviews && project.website !== '#'
+  const hasLivePreview = (project) => (
+    canShowLivePreviews &&
+    project.website !== '#' &&
+    activePreviewTitle === project.title
+  )
+
+  const togglePreview = (project) => {
+    setActivePreviewTitle((currentTitle) => (
+      currentTitle === project.title ? null : project.title
+    ))
+  }
 
   const getFacebookUrl = (project) => {
     if (project.facebook) return project.facebook
@@ -209,6 +223,8 @@ export default function PortfolioPage() {
                   alt={`${project.title} project image`}
                   width={project.imageWidth}
                   height={project.imageHeight}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  quality={70}
                   className="absolute inset-0 h-full w-full object-cover"
                 />
                 {hasLivePreview(project) && (
@@ -231,6 +247,15 @@ export default function PortfolioPage() {
                   <span className="absolute right-4 top-4 z-10 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur">
                     Open Website
                   </span>
+                )}
+                {canShowLivePreviews && project.website !== '#' && (
+                  <button
+                    type="button"
+                    onClick={() => togglePreview(project)}
+                    className="absolute right-4 top-4 z-20 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur transition hover:bg-white"
+                  >
+                    {activePreviewTitle === project.title ? 'Hide Preview' : 'Load Preview'}
+                  </button>
                 )}
                 <a
                   href={project.website}
