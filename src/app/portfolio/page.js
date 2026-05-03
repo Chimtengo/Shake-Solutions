@@ -58,16 +58,6 @@ const projects = [
     desc: 'a dynamic non-profit organization committed to strengthening communities and fostering sustainable development.'
   },
   {
-    title: 'Tapsystylish Store',
-    category: 'Hosting',
-    type: 'Web Hosting',
-    image: '/images/portfolio/tapsystylish-store.jpg',
-    imageWidth: 1600,
-    imageHeight: 1000,
-    website: '#',
-    desc: 'E-commerce hosting solution.'
-  },
-  {
     title: 'Delta Trading and Investments Ltd',
     category: 'Social Media',
     type: 'Social Media Campaign',
@@ -78,26 +68,6 @@ const projects = [
     facebook: '',
     instagram: '',
     desc: 'Educational content and engagement.'
-  },
-  {
-    title: 'Brand Identity Package',
-    category: 'Graphics',
-    type: 'Graphics Design',
-    image: '/images/portfolio/brand-identity-package.jpg',
-    imageWidth: 1600,
-    imageHeight: 1000,
-    website: '#',
-    desc: 'Complete branding and logo design.'
-  },
-  {
-    title: 'Marketing Campaign',
-    category: 'Graphics',
-    type: 'Graphics Design',
-    image: '/images/portfolio/marketing-campaign.jpg',
-    imageWidth: 1600,
-    imageHeight: 1000,
-    website: '#',
-    desc: 'Social media graphics and promotional materials.'
   },
   {
     title: 'Budget Car Hire',
@@ -120,16 +90,6 @@ const projects = [
     imageHeight: 1000,
     website: 'https://reachgirls.org/',
     desc: 'Motivated by the desire to create change to the girls.'
-  },
-  {
-    title: 'Restaurant Website',
-    category: 'Hosting',
-    type: 'Web Hosting',
-    image: '/images/portfolio/restaurant-website.jpg',
-    imageWidth: 1600,
-    imageHeight: 1000,
-    website: '#',
-    desc: 'Menu management and online ordering.'
   }
 ]
 
