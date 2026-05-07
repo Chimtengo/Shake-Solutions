@@ -4,7 +4,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 The internal news/blog pages are available at `/news` and `/news/[slug]`. Vacancy pages are available at `/vacancies` and `/vacancies/[slug]`.
 
-The admin dashboards are available at `/admin/news` and `/admin/vacancies`.
+The admin dashboard is available at `/admin`. The news and vacancies management pages are available at `/admin/news` and `/admin/vacancies`.
+The `/dashboard` and `/admin/dashboard` URLs redirect to `/admin`.
 
 To connect Supabase:
 

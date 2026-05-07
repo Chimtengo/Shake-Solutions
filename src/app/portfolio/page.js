@@ -3,95 +3,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import PageHeader from '@/components/PageHeader'
-
-const projects = [
-  {
-    title: 'AMOS KAMBALE',
-    category: 'Web Development',
-    type: 'Developed & Hosted',
-    image: '/images/portfolio/kambale.png',
-    imageWidth: 1892,
-    imageHeight: 945,
-    website: 'https://amoskambale.org/',
-    desc: 'Complete website solution with hosting services.'
-  },
-  {
-    title: 'KZN Printing & Package',
-    category: 'Web Development',
-    type: 'Developed & Hosted',
-    image: '/images/portfolio/kzn.png',
-    imageWidth: 1881,
-    imageHeight: 934,
-    website: 'https://kznprintingmw.com/',
-    desc: 'Sports league management platform.'
-  },
-  {
-    title: 'SICO Holdings',
-    category: 'Social Media',
-    type: 'Social Media Management',
-    image: '/images/portfolio/sico.png',
-    imageWidth: 1542,
-    imageHeight: 921,
-    website: 'https://sico.mw/',
-    facebook: '',
-    instagram: '',
-    desc: 'Complete social media presence and branding.'
-  },
-  {
-    title: 'SASO',
-    category: 'Web Development',
-    type: 'Developed & Hosted',
-    image: '/images/portfolio/saso.png',
-    imageWidth: 1919,
-    imageHeight: 950,
-    website: 'https://sasomw.org/dev/',
-    desc: 'Professional corporate website.'
-  },
-  {
-    title: 'Save the Village Youth Foundation',
-    category: 'Web Development',
-    type: 'Developed & Hosted',
-    image: '/images/portfolio/save-the-village.png',
-    imageWidth: 1891,
-    imageHeight: 941,
-    website: 'https://savethevillagemw.org/',
-    desc: 'a dynamic non-profit organization committed to strengthening communities and fostering sustainable development.'
-  },
-  {
-    title: 'Delta Trading and Investments Ltd',
-    category: 'Social Media',
-    type: 'Social Media Campaign',
-    image: '/images/portfolio/delta.png',
-    imageWidth: 1895,
-    imageHeight: 949,
-    website: 'https://deltatradingmw.com/',
-    facebook: '',
-    instagram: '',
-    desc: 'Educational content and engagement.'
-  },
-  {
-    title: 'Budget Car Hire',
-    category: 'Social Media',
-    type: 'Social Media Management',
-    image: '/images/portfolio/budget-car-hire.png',
-    imageWidth: 1903,
-    imageHeight: 951,
-    website: 'https://budgetcarhiremw.net/',
-    facebook: '',
-    instagram: '',
-    desc: 'Find the right car for yourself.'
-  },
-  {
-    title: 'Reach Girls',
-    category: 'Web Development',
-    type: 'Custom Development',
-    image: '/images/portfolio/reach-girls.png',
-    imageWidth: 1600,
-    imageHeight: 1000,
-    website: 'https://reachgirls.org/',
-    desc: 'Motivated by the desire to create change to the girls.'
-  }
-]
+import { portfolioProjects } from '@/data/portfolioProjects'
 
 const facebookSearchBaseUrl = 'https://www.facebook.com/search/top/'
 const instagramSearchBaseUrl = 'https://www.instagram.com/explore/search/keyword/'
@@ -102,8 +14,8 @@ export default function PortfolioPage() {
   const filters = ['All', 'Web Development', 'Hosting', 'Social Media', 'Graphics']
 
   const filteredProjects = useMemo(() => {
-    if (activeFilter === 'All') return projects
-    return projects.filter((project) => project.category === activeFilter)
+    if (activeFilter === 'All') return portfolioProjects
+    return portfolioProjects.filter((project) => project.category === activeFilter)
   }, [activeFilter])
 
   const getFacebookUrl = (project) => {
@@ -239,6 +151,10 @@ export default function PortfolioPage() {
           </div>
         )}
       </section>
+
+
+
+
 
       <section className="bg-slate-50 py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">

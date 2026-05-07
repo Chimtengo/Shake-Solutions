@@ -268,40 +268,47 @@ export default function AdminVacanciesPage() {
           </div>
 
           <div className="mt-6 grid gap-5 md:grid-cols-2">
-            <Field label="Title">
+            <Field label="Job Title">
               <input
                 value={form.title}
                 onChange={(event) => updateField('title', event.target.value)}
                 required
+                placeholder="Example: Web Developer Intern"
                 className="form-input"
               />
             </Field>
-            <Field label="Slug">
+            <Field
+              label="Vacancy Link"
+              hint="This becomes the vacancy page URL. Use short words with dashes, for example: web-developer-intern."
+            >
               <input
                 value={form.slug}
                 onChange={(event) => updateField('slug', slugify(event.target.value))}
                 required
+                placeholder="web-developer-intern"
                 className="form-input"
               />
             </Field>
           </div>
 
           <div className="mt-5 grid gap-5 md:grid-cols-3">
-            <Field label="Department">
+            <Field label="Department or Team">
               <input
                 value={form.department}
                 onChange={(event) => updateField('department', event.target.value)}
+                placeholder="Example: Development"
                 className="form-input"
               />
             </Field>
-            <Field label="Location">
+            <Field label="Work Location">
               <input
                 value={form.location}
                 onChange={(event) => updateField('location', event.target.value)}
+                placeholder="Example: Lilongwe, Malawi"
                 className="form-input"
               />
             </Field>
-            <Field label="Type">
+            <Field label="Job Type">
               <select
                 value={form.type}
                 onChange={(event) => updateField('type', event.target.value)}
@@ -316,31 +323,46 @@ export default function AdminVacanciesPage() {
             </Field>
           </div>
 
-          <Field label="Short Summary" className="mt-5">
+          <Field
+            label="Short Summary"
+            hint="A brief preview shown on the vacancies list. Write 1 or 2 sentences."
+            className="mt-5"
+          >
             <textarea
               value={form.excerpt}
               onChange={(event) => updateField('excerpt', event.target.value)}
               rows="3"
               required
+              placeholder="Example: We are looking for a motivated intern to support website and web application projects."
               className="form-input resize-none"
             />
           </Field>
 
-          <Field label="Role Overview" className="mt-5">
+          <Field
+            label="Role Overview"
+            hint="Explain what the successful candidate will do and who the role is best suited for."
+            className="mt-5"
+          >
             <textarea
               value={form.description}
               onChange={(event) => updateField('description', event.target.value)}
               required
               rows="8"
+              placeholder="Write the full vacancy description here. Use a new line for each paragraph."
               className="form-input resize-y"
             />
           </Field>
 
-          <Field label="Requirements - one per line" className="mt-5">
+          <Field
+            label="Requirements"
+            hint="Add one requirement per line. Each line will be shown as a separate item on the vacancy page."
+            className="mt-5"
+          >
             <textarea
               value={form.requirements}
               onChange={(event) => updateField('requirements', event.target.value)}
               rows="7"
+              placeholder={'Basic HTML, CSS, and JavaScript knowledge\nStrong attention to detail\nWillingness to learn and work with a team'}
               className="form-input resize-y"
             />
           </Field>
@@ -351,10 +373,11 @@ export default function AdminVacanciesPage() {
                 type="email"
                 value={form.application_email}
                 onChange={(event) => updateField('application_email', event.target.value)}
+                placeholder="sales@shakesolutions.net"
                 className="form-input"
               />
             </Field>
-            <Field label="Closing Date">
+            <Field label="Application Closing Date">
               <input
                 type="date"
                 value={form.closing_date || ''}
@@ -362,7 +385,10 @@ export default function AdminVacanciesPage() {
                 className="form-input"
               />
             </Field>
-            <Field label="Publish Date">
+            <Field
+              label="Publish Date"
+              hint="Leave empty to use the current date when Published is checked."
+            >
               <input
                 type="datetime-local"
                 value={form.published_at || ''}
@@ -447,11 +473,12 @@ export default function AdminVacanciesPage() {
   )
 }
 
-function Field({ label, className = '', children }) {
+function Field({ label, hint, className = '', children }) {
   return (
     <label className={`block ${className}`}>
       <span className="mb-2 block text-sm font-semibold text-slate-700">{label}</span>
       {children}
+      {hint && <span className="mt-2 block text-xs leading-relaxed text-slate-500">{hint}</span>}
     </label>
   )
 }

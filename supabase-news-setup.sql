@@ -19,7 +19,6 @@ create table if not exists public.articles (
 );
 
 alter table public.articles enable row level security;
-
 drop policy if exists "Published articles are readable by everyone" on public.articles;
 create policy "Published articles are readable by everyone"
 on public.articles

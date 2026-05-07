@@ -53,17 +53,28 @@ export default async function NewsArticlePage({ params }) {
         <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
           <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             {article.cover_image ? (
-              <img src={article.cover_image} alt="" className="max-h-[520px] w-full object-cover" />
+              <div className="bg-slate-100 px-3 py-3 md:px-5 md:py-5">
+                <img
+                  src={article.cover_image}
+                  alt={`${article.title} cover image`}
+                  className="mx-auto max-h-[560px] w-full rounded-xl object-contain"
+                />
+              </div>
             ) : (
               <div className="flex min-h-72 items-center justify-center bg-gradient-to-br from-[var(--brand-dark)] via-[var(--brand-mid)] to-[var(--brand-accent)] text-7xl font-black text-white/20">
                 SS
               </div>
             )}
-            <div className="p-7 md:p-10">
-              <p className="text-xl leading-relaxed text-slate-600">{article.excerpt}</p>
-              <div className="mt-8 space-y-5 text-base leading-8 text-slate-700">
+            <div className="mx-auto max-w-3xl p-7 md:p-10">
+              {article.excerpt && (
+                <p className="border-l-4 border-[var(--brand-accent)] pl-5 text-lg leading-8 text-slate-600 [overflow-wrap:anywhere] md:text-xl">
+                  {article.excerpt}
+                </p>
+              )}
+              <div className="mt-9 space-y-6 text-base leading-8 text-slate-700 [overflow-wrap:anywhere] md:text-lg md:leading-9">
                 {article.content
                   ?.split('\n')
+                  .map((paragraph) => paragraph.trim())
                   .filter(Boolean)
                   .map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>

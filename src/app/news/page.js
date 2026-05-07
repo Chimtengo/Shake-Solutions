@@ -41,16 +41,16 @@ export default async function NewsPage({ searchParams }) {
                 key={article.id}
                 className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                <Link href={`/news/${article.slug}`} className="grid md:grid-cols-[260px_1fr]">
-                  <div className="relative min-h-56 bg-gradient-to-br from-[var(--brand-dark)] via-[var(--brand-mid)] to-[var(--brand-accent)]">
+                <Link href={`/news/${article.slug}`} className="grid md:grid-cols-[280px_1fr]">
+                  <div className="relative min-h-56 bg-slate-100 md:min-h-full">
                     {article.cover_image ? (
                       <img
                         src={article.cover_image}
-                        alt=""
-                        className="h-full w-full object-cover"
+                        alt={`${article.title} cover image`}
+                        className="h-full min-h-56 w-full object-contain p-2"
                       />
                     ) : (
-                      <div className="flex h-full min-h-56 items-center justify-center px-8 text-center text-4xl font-black text-white/25">
+                      <div className="flex h-full min-h-56 items-center justify-center bg-gradient-to-br from-[var(--brand-dark)] via-[var(--brand-mid)] to-[var(--brand-accent)] px-8 text-center text-4xl font-black text-white/25">
                         SS
                       </div>
                     )}
@@ -65,7 +65,7 @@ export default async function NewsPage({ searchParams }) {
                       <span className="h-1 w-1 rounded-full bg-slate-300" />
                       <span>{article.read_time || 1} minute read</span>
                     </div>
-                    <h2 className="text-2xl font-bold text-[var(--brand-dark)] transition-colors group-hover:text-[var(--brand-accent)]">
+                    <h2 className="text-2xl font-bold text-[var(--brand-dark)] transition-colors [overflow-wrap:anywhere] group-hover:text-[var(--brand-accent)]">
                       {article.title}
                     </h2>
                     <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-slate-500">
@@ -73,7 +73,7 @@ export default async function NewsPage({ searchParams }) {
                       <span className="h-1 w-1 rounded-full bg-slate-300" />
                       <time dateTime={article.published_at}>{formatDate(article.published_at)}</time>
                     </div>
-                    <p className="mt-4 leading-relaxed text-slate-600">
+                    <p className="mt-4 leading-relaxed text-slate-600 [overflow-wrap:anywhere]">
                       {article.excerpt || createExcerpt(article.content)}
                     </p>
                     <span className="mt-5 inline-flex font-semibold text-[var(--brand-accent)]">

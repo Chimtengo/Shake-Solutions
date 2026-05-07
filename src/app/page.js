@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import ClientsMarquee from '@/components/ClientsMarquee'
+import { portfolioProjects } from '@/data/portfolioProjects'
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -179,6 +180,21 @@ export default function HomePage() {
       icon: '*',
       iconSrc: '/images/why-choose/certified-vendor.svg',
       iconAlt: 'Certified Vendor icon'
+    }
+  ]
+
+  const featuredProjects = [
+    {
+      ...portfolioProjects.find((project) => project.title === 'AMOS KAMBALE'),
+      featuredCategory: 'Web Development'
+    },
+    {
+      ...portfolioProjects.find((project) => project.title === 'SICO Holdings'),
+      featuredCategory: 'Social Media'
+    },
+    {
+      ...portfolioProjects.find((project) => project.title === 'Reach Girls'),
+      featuredCategory: 'Custom Development'
     }
   ]
 
@@ -490,24 +506,46 @@ export default function HomePage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { title: 'PTYO Website', category: 'Web Development', image: '' },
-            { title: 'Volleyball League', category: 'Web Development', image: '' },
-            { title: 'Shellyz Photography', category: 'Social Media', image: '' }
-          ].map((project, idx) => (
-            <motion.div key={idx} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} whileHover={{ y: -8 }} className="card overflow-hidden group cursor-pointer">
-              <div className="h-48 bg-gradient-to-br from-[var(--brand-dark)] to-[var(--brand-mid)] flex items-center justify-center text-6xl">
-                {project.image}
-              </div>
+          {featuredProjects.map((project, idx) => (
+            <motion.article key={project.title} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} whileHover={{ y: -8 }} className="card overflow-hidden group">
+              <a
+                href={project.website || '/portfolio'}
+                target={project.website ? '_blank' : undefined}
+                rel={project.website ? 'noopener noreferrer' : undefined}
+                aria-label={`Open ${project.title} project`}
+                className="block"
+              >
+                <div className="relative h-48 overflow-hidden bg-slate-100">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} project image`}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    quality={70}
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
+                </div>
+              </a>
+
               <div className="p-6">
                 <span className="inline-block px-3 py-1 bg-[var(--brand-accent)]/10 text-[var(--brand-accent)] text-xs font-semibold rounded-full mb-3">
-                  {project.category}
+                  {project.featuredCategory}
                 </span>
                 <h3 className="text-xl font-bold text-[var(--brand-dark)] group-hover:text-[var(--brand-accent)] transition-colors">
                   {project.title}
                 </h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  {project.desc}
+                </p>
+                <a href="/portfolio" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-accent)] hover:gap-3 transition-all">
+                  View Portfolio
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 

@@ -291,19 +291,24 @@ export default function AdminNewsPage() {
           </div>
 
           <div className="mt-6 grid gap-5 md:grid-cols-2">
-            <Field label="Title">
+            <Field label="Article Title">
               <input
                 value={form.title}
                 onChange={(event) => updateField('title', event.target.value)}
                 required
+                placeholder="Example: Shake Solutions launches new hosting packages"
                 className="form-input"
               />
             </Field>
-            <Field label="Slug">
+            <Field
+              label="Article Link"
+              hint="This becomes the page URL. Use short words with dashes, for example: new-hosting-packages."
+            >
               <input
                 value={form.slug}
                 onChange={(event) => updateField('slug', slugify(event.target.value))}
                 required
+                placeholder="new-hosting-packages"
                 className="form-input"
               />
             </Field>
@@ -335,21 +340,27 @@ export default function AdminNewsPage() {
             </Field>
           </div>
 
-          <Field label="Excerpt" className="mt-5">
+          <Field
+            label="Short Summary"
+            hint="A brief preview shown on the news list. Write 1 or 2 sentences."
+            className="mt-5"
+          >
             <textarea
               value={form.excerpt}
               onChange={(event) => updateField('excerpt', event.target.value)}
               rows="3"
+              placeholder="Example: We have launched updated hosting packages for small businesses, NGOs, and growing companies."
               className="form-input resize-none"
             />
           </Field>
 
-          <Field label="Content" className="mt-5">
+          <Field label="Full Article" className="mt-5">
             <textarea
               value={form.content}
               onChange={(event) => updateField('content', event.target.value)}
               required
               rows="10"
+              placeholder="Write the full news article here. Use a new line for each paragraph."
               className="form-input resize-y"
             />
           </Field>
@@ -466,11 +477,12 @@ export default function AdminNewsPage() {
   )
 }
 
-function Field({ label, className = '', children }) {
+function Field({ label, hint, className = '', children }) {
   return (
     <label className={`block ${className}`}>
       <span className="mb-2 block text-sm font-semibold text-slate-700">{label}</span>
       {children}
+      {hint && <span className="mt-2 block text-xs leading-relaxed text-slate-500">{hint}</span>}
     </label>
   )
 }
