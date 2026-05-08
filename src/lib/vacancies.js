@@ -1,4 +1,3 @@
-import { fallbackVacancies } from '@/data/vacanciesFallback'
 import { getSupabaseServerClient, hasSupabaseConfig } from '@/lib/supabase'
 
 const vacancyFields =
@@ -15,7 +14,7 @@ export function formatVacancyDate(value) {
 }
 
 export async function getPublishedVacancies() {
-  if (!hasSupabaseConfig) return fallbackVacancies
+  if (!hasSupabaseConfig) return []
 
   const supabase = getSupabaseServerClient()
   const { data, error } = await supabase
@@ -26,16 +25,14 @@ export async function getPublishedVacancies() {
 
   if (error) {
     console.error('Unable to load vacancies from Supabase:', error.message)
-    return fallbackVacancies
+    return []
   }
 
-  return data?.length ? data : fallbackVacancies
+  return data || []
 }
 
 export async function getVacancyBySlug(slug) {
-  if (!hasSupabaseConfig) {
-    return fallbackVacancies.find((vacancy) => vacancy.slug === slug) || null
-  }
+  if (!hasSupabaseConfig) return null
 
   const supabase = getSupabaseServerClient()
   const { data, error } = await supabase
@@ -47,7 +44,7 @@ export async function getVacancyBySlug(slug) {
 
   if (error) {
     console.error('Unable to load vacancy from Supabase:', error.message)
-    return fallbackVacancies.find((vacancy) => vacancy.slug === slug) || null
+    return null
   }
 
   return data

@@ -29,13 +29,6 @@ export default function Navbar() {
       name: 'Domain Search',
       href: 'https://www.shakesolutions.net/billing/cart.php?a=add&domain=register',
       external: true
-    },
-    {
-      name: 'VPS',
-      children: [
-        { name: 'Server 1', href: 'http://192.185.129.252:2083/', external: true },
-        { name: 'Server 2', href: 'http://162.241.148.33:2083/', external: true }
-      ]
     }
   ]
   const updatesLinks = [

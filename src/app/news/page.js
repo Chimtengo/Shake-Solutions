@@ -86,8 +86,12 @@ export default async function NewsPage({ searchParams }) {
 
             {filteredArticles.length === 0 && (
               <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm">
-                <p className="text-lg font-semibold text-[var(--brand-dark)]">No articles found.</p>
-                <p className="mt-2 text-slate-600">Try another search term or check back soon.</p>
+                <p className="text-lg font-semibold text-[var(--brand-dark)]">
+                  {query ? 'No articles found.' : 'No news has been posted yet.'}
+                </p>
+                <p className="mt-2 text-slate-600">
+                  {query ? 'Try another search term or check back soon.' : 'Please check back soon for updates from Shake Solutions.'}
+                </p>
               </div>
             )}
           </div>
@@ -126,6 +130,9 @@ export default async function NewsPage({ searchParams }) {
                     </span>
                   </div>
                 ))}
+                {!Object.keys(categories).length && (
+                  <p className="text-sm text-slate-600">No categories yet.</p>
+                )}
               </div>
             </div>
           </aside>

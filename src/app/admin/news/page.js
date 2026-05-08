@@ -202,7 +202,7 @@ export default function AdminNewsPage() {
             Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to `.env.local`, then restart the dev server.
           </p>
           <p className="mt-3 text-slate-600">
-            The public news page will keep showing demo articles until Supabase is connected.
+            The public news page will show an empty-state message until Supabase is connected and published articles are available.
           </p>
         </div>
       </section>

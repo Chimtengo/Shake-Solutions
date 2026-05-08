@@ -1,4 +1,3 @@
-import { fallbackArticles } from '@/data/newsFallback'
 import { getSupabaseServerClient, hasSupabaseConfig } from '@/lib/supabase'
 
 const articleFields =
@@ -26,7 +25,7 @@ export function createExcerpt(content = '', length = 150) {
 }
 
 export async function getPublishedArticles() {
-  if (!hasSupabaseConfig) return fallbackArticles
+  if (!hasSupabaseConfig) return []
 
   const supabase = getSupabaseServerClient()
   const { data, error } = await supabase
@@ -37,16 +36,14 @@ export async function getPublishedArticles() {
 
   if (error) {
     console.error('Unable to load articles from Supabase:', error.message)
-    return fallbackArticles
+    return []
   }
 
-  return data?.length ? data : fallbackArticles
+  return data || []
 }
 
 export async function getArticleBySlug(slug) {
-  if (!hasSupabaseConfig) {
-    return fallbackArticles.find((article) => article.slug === slug) || null
-  }
+  if (!hasSupabaseConfig) return null
 
   const supabase = getSupabaseServerClient()
   const { data, error } = await supabase
@@ -58,7 +55,7 @@ export async function getArticleBySlug(slug) {
 
   if (error) {
     console.error('Unable to load article from Supabase:', error.message)
-    return fallbackArticles.find((article) => article.slug === slug) || null
+    return null
   }
 
   return data

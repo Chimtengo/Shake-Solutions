@@ -70,8 +70,12 @@ export default async function VacanciesPage({ searchParams }) {
 
             {filteredVacancies.length === 0 && (
               <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm">
-                <p className="text-lg font-semibold text-[var(--brand-dark)]">No vacancies found.</p>
-                <p className="mt-2 text-slate-600">Try another search term or check back soon.</p>
+                <p className="text-lg font-semibold text-[var(--brand-dark)]">
+                  {query ? 'No vacancies found.' : 'No vacancies have been posted yet.'}
+                </p>
+                <p className="mt-2 text-slate-600">
+                  {query ? 'Try another search term or check back soon.' : 'Please check back soon for future opportunities.'}
+                </p>
               </div>
             )}
           </div>
