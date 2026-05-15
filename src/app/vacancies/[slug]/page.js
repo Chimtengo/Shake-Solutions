@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { absoluteUrl, siteName } from '@/lib/seo'
 import { formatVacancyDate, getPublishedVacancies, getVacancyBySlug } from '@/lib/vacancies'
 
 export async function generateMetadata({ params }) {
@@ -14,7 +15,24 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${vacancy.title} | Shake Solutions Vacancies`,
-    description: vacancy.excerpt
+    description: vacancy.excerpt,
+    alternates: {
+      canonical: absoluteUrl(`/vacancies/${vacancy.slug}`)
+    },
+    openGraph: {
+      title: vacancy.title,
+      description: vacancy.excerpt,
+      url: absoluteUrl(`/vacancies/${vacancy.slug}`),
+      siteName,
+      type: 'website',
+      images: ['/images/logo.png']
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: vacancy.title,
+      description: vacancy.excerpt,
+      images: ['/images/logo.png']
+    }
   }
 }
 
@@ -25,9 +43,38 @@ export default async function VacancyPage({ params }) {
 
   const vacancies = await getPublishedVacancies()
   const otherVacancies = vacancies.filter((item) => item.slug !== vacancy.slug).slice(0, 4)
+  const vacancyJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    title: vacancy.title,
+    description: vacancy.description || vacancy.excerpt,
+    datePosted: vacancy.published_at,
+    validThrough: vacancy.closing_date,
+    employmentType: vacancy.type,
+    hiringOrganization: {
+      '@type': 'Organization',
+      name: siteName,
+      sameAs: absoluteUrl('/'),
+      logo: absoluteUrl('/images/logo.png')
+    },
+    jobLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: vacancy.location || 'Lilongwe',
+        addressCountry: 'MW'
+      }
+    }
+  }
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(vacancyJsonLd).replace(/</g, '\\u003c')
+        }}
+      />
       <section className="bg-gradient-to-r from-[var(--brand-dark)] to-[var(--brand-mid)] text-white py-20">
         <div className="max-w-5xl mx-auto px-6">
           <Link href="/vacancies" className="mb-8 inline-flex text-sm font-semibold text-white/80 transition hover:text-white">

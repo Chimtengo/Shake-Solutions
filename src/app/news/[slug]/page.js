@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { formatDate, formatViews, getArticleBySlug, getPublishedArticles } from '@/lib/news'
+import { absoluteUrl, siteName } from '@/lib/seo'
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params
@@ -14,7 +15,27 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${article.title} | Shake Solutions News`,
-    description: article.excerpt
+    description: article.excerpt,
+    alternates: {
+      canonical: absoluteUrl(`/news/${article.slug}`)
+    },
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      url: absoluteUrl(`/news/${article.slug}`),
+      siteName,
+      type: 'article',
+      publishedTime: article.published_at,
+      modifiedTime: article.updated_at,
+      authors: [article.author || siteName],
+      images: article.cover_image ? [article.cover_image] : ['/images/logo.png']
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.excerpt,
+      images: article.cover_image ? [article.cover_image] : ['/images/logo.png']
+    }
   }
 }
 
@@ -25,9 +46,37 @@ export default async function NewsArticlePage({ params }) {
 
   const articles = await getPublishedArticles()
   const recentArticles = articles.filter((item) => item.slug !== article.slug).slice(0, 4)
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.excerpt,
+    image: article.cover_image || absoluteUrl('/images/logo.png'),
+    datePublished: article.published_at,
+    dateModified: article.updated_at || article.published_at,
+    author: {
+      '@type': 'Organization',
+      name: article.author || siteName
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteName,
+      logo: {
+        '@type': 'ImageObject',
+        url: absoluteUrl('/images/logo.png')
+      }
+    },
+    mainEntityOfPage: absoluteUrl(`/news/${article.slug}`)
+  }
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, '\\u003c')
+        }}
+      />
       <section className="bg-gradient-to-r from-[var(--brand-dark)] to-[var(--brand-mid)] text-white py-20">
         <div className="max-w-5xl mx-auto px-6">
           <Link href="/news" className="mb-8 inline-flex text-sm font-semibold text-white/80 transition hover:text-white">
@@ -82,6 +131,10 @@ export default async function NewsArticlePage({ params }) {
               </div>
             </div>
           </article>
+
+
+
+          
 
           <aside className="space-y-6 lg:sticky lg:top-32 lg:self-start">
             <div className="card p-6">

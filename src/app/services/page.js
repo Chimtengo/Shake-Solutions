@@ -1,8 +1,10 @@
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import PageHeader from '@/components/PageHeader'
+import { services } from '@/data/services'
 
 export default function ServicesPage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -21,58 +23,6 @@ export default function ServicesPage() {
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [])
-
-  const services = [
-    {
-      imageSrc: '/images/services/web-system-development-placeholder.jpg',
-      imageAlt: 'Web and system development placeholder image',
-      title: 'Web & System Development',
-      description: 'We develop state-of-the-art systems per user requirements. Expert in all languages including CSS, Bootstrap, HTML, PHP, WordPress, and ASP.Net with SQL or MySQL as backend database.',
-      features: ['Custom Web Applications', 'E-commerce Solutions', 'Content Management Systems', 'API Development']
-    },
-    {
-      imageSrc: '/images/services/networking-solutions-placeholder.jpg',
-      imageAlt: 'Networking solutions placeholder image',
-      title: 'Networking Solutions',
-      description: 'Comprehensive solutions for Local and Wide Area Networks (LAN, WAN) and Remote Access, plus virtualization in Windows Server 2012 and Linux environments.',
-      features: ['Network Design & Setup', 'VPN Configuration', 'Server Management', 'Network Security']
-    },
-    {
-      imageSrc: '/images/services/web-hosting-services-placeholder.jpg',
-      imageAlt: 'Web hosting services placeholder image',
-      title: 'Web Hosting Services',
-      description: 'Competitive website and email hosting at affordable prices. As an SNDP-accredited vendor, we are certified for .mw domain registration.',
-      features: ['Shared Hosting', 'VPS Hosting', 'Domain Registration', '99.9% Uptime Guarantee']
-    },
-    {
-      imageSrc: '/images/services/digital-marketing-placeholder.jpg',
-      imageAlt: 'Digital marketing placeholder image',
-      title: 'Digital Marketing',
-      description: 'Expert team organizing and implementing strategies to optimize website ranking and boost your online presence to reach target audiences.',
-      features: ['SEO Optimization', 'Social Media Marketing', 'Content Strategy', 'Analytics & Reporting']
-    },
-    {
-      imageSrc: '/images/services/graphics-designing-placeholder.jpg',
-      imageAlt: 'Graphics designing placeholder image',
-      title: 'Graphics Designing',
-      description: 'Professional design solutions bringing your ideas to life. From logos to websites and social media graphics, our skilled team delivers excellence.',
-      features: ['Logo Design', 'Brand Identity', 'Social Media Graphics', 'Print Design']
-    },
-    {
-      imageSrc: '/images/services/customer-support-placeholder.jpg',
-      imageAlt: 'Customer support placeholder image',
-      title: 'Customer Support',
-      description: 'Free 24/7 online support for everyone. Our dedicated team attends to all help requests and finds the best solutions for you.',
-      features: ['24/7 Availability', 'Technical Assistance', 'Remote Support', 'Priority Response']
-    },
-    {
-      imageSrc: '/images/services/cctv-installation-placeholder.jpg',
-      imageAlt: 'CCTV installation placeholder image',
-      title: 'CCTV Installation',
-      description: 'Professional CCTV installation services for homes, offices, and commercial spaces, helping you monitor and protect what matters most.',
-      features: ['Site Assessment', 'Camera Installation', 'Remote Monitoring Setup', 'Maintenance & Support']
-    }
-  ]
 
   const process = [
     {
@@ -104,7 +54,7 @@ export default function ServicesPage() {
         subtitle="Comprehensive IT solutions tailored to your business needs"
       />
 
-      <section ref={sectionRef} className="max-w-7xl mx-auto px-6 py-24">
+      <section id="services-list" ref={sectionRef} className="max-w-7xl mx-auto px-6 py-24 scroll-mt-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -120,46 +70,52 @@ export default function ServicesPage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, idx) => (
-            <motion.div
-              key={idx}
+            <motion.article
+              key={service.slug}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               whileHover={{ y: -8 }}
-              className="card p-8 group cursor-pointer"
+              className="card group cursor-pointer overflow-hidden"
             >
-              <div className="mb-6 overflow-hidden rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                <Image
-                  src={service.imageSrc}
-                  alt={service.imageAlt}
-                  width={640}
-                  height={360}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  quality={70}
-                  className="h-40 w-full object-cover"
-                />
-              </div>
+              <Link href={`/services/${service.slug}`} className="block h-full p-8">
+                <div className="mb-6 overflow-hidden rounded-2xl transition-transform duration-300 group-hover:scale-105">
+                  <Image
+                    src={service.imageSrc}
+                    alt={service.imageAlt}
+                    width={640}
+                    height={360}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    quality={70}
+                    className="h-40 w-full object-cover"
+                  />
+                </div>
 
-              <h3 className="text-2xl font-bold text-[var(--brand-dark)] mb-4 group-hover:text-[var(--brand-accent)] transition-colors">
-                {service.title}
-              </h3>
+                <h3 className="text-2xl font-bold text-[var(--brand-dark)] mb-4 group-hover:text-[var(--brand-accent)] transition-colors">
+                  {service.title}
+                </h3>
 
-              <p className="text-slate-600 mb-6 leading-relaxed">
-                {service.description}
-              </p>
+                <p className="text-slate-600 mb-6 leading-relaxed">
+                  {service.description}
+                </p>
 
-              <ul className="space-y-2">
-                {service.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-slate-700">
-                    <svg className="w-4 h-4 text-[var(--brand-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+                <ul className="space-y-2">
+                  {service.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-2 text-sm text-slate-700">
+                      <svg className="w-4 h-4 text-[var(--brand-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <span className="mt-6 inline-flex font-semibold text-[var(--brand-accent)]">
+                  View Details
+                </span>
+              </Link>
+            </motion.article>
           ))}
         </div>
       </section>
@@ -220,8 +176,8 @@ export default function ServicesPage() {
               <a href="/contact" className="inline-block bg-[var(--brand-accent)] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[var(--brand-accent)]/90 transition-all duration-300 hover:scale-105 shadow-lg">
                 Contact Us Today
               </a>
-              <a href="/pricing" className="inline-block bg-white text-[var(--brand-dark)] px-8 py-4 rounded-lg font-semibold hover:bg-white/90 transition-all duration-300 hover:scale-105 shadow-lg">
-                View Pricing
+              <a href="#services-list" className="inline-block bg-white text-[var(--brand-dark)] px-8 py-4 rounded-lg font-semibold hover:bg-white/90 transition-all duration-300 hover:scale-105 shadow-lg">
+                Explore Services
               </a>
             </div>
           </motion.div>

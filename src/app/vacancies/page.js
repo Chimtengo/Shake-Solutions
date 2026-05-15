@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import PageHeader from '@/components/PageHeader'
+import { pageMetadata } from '@/lib/seo'
 import { formatVacancyDate, getPublishedVacancies } from '@/lib/vacancies'
 
-export const metadata = {
-  title: 'Vacancies | Shake Solutions',
-  description: 'Explore current career and internship opportunities at Shake Solutions.'
-}
+export const metadata = pageMetadata({
+  title: 'Vacancies',
+  description: 'Explore current career and internship opportunities at Shake Solutions in Malawi.',
+  path: '/vacancies'
+})
 
 export default async function VacanciesPage({ searchParams }) {
   const vacancies = await getPublishedVacancies()

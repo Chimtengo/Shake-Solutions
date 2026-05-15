@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import PageHeader from '@/components/PageHeader'
 import { createExcerpt, formatDate, formatViews, getPublishedArticles } from '@/lib/news'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'News | Shake Solutions',
-  description: 'Latest news, articles, offers, and company updates from Shake Solutions.'
-}
+export const metadata = pageMetadata({
+  title: 'News',
+  description: 'Latest news, articles, offers, digital tips, and company updates from Shake Solutions.',
+  path: '/news'
+})
 
 export default async function NewsPage({ searchParams }) {
   const articles = await getPublishedArticles()

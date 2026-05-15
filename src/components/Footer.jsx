@@ -10,13 +10,14 @@ export default function Footer() {
       { name: 'Web Hosting', href: '/services' },
       { name: 'Networking', href: '/services' },
       { name: 'Digital Marketing', href: '/services' },
-      { name: 'Graphics Design', href: '/services' }
+      { name: 'Graphics Design', href: '/services' },
+      { name: 'GPS Fleet Tracking', href: '/services/gps-fleet-tracking' },
+      { name: 'Enterprise Storage', href: '/services/enterprise-storage-services' }
     ],
     company: [
       { name: 'About Us', href: '/about' },
       { name: 'Our Team', href: '/team' },
-      { name: 'Portfolio', href: '/portfolio' },
-      { name: 'Pricing', href: '/pricing' }
+      { name: 'Portfolio', href: '/portfolio' }
     ],
     support: [
       { name: 'Contact Us', href: '/contact' },
@@ -34,13 +35,13 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-6">
               <Image
-                src="/images/logo.png"
+                src="/images/footer-favicon-logo.png.png"
                 alt="Shake Solutions Logo"
-                width={180}
-                height={180}
-                sizes="60px"
+                width={220}
+                height={220}
+                sizes="80px"
                 quality={70}
-                className="h-15 w-auto"
+                className="h-20 w-auto"
               />
             </div>
             <h3 className="text-2xl font-bold mb-4">

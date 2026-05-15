@@ -38,6 +38,17 @@ textarea {
   touch-action: manipulation;
 }
 
+.elfsight-chatbot-anchor,
+.elfsight-chatbot-anchor iframe {
+  left: 1.5rem !important;
+  right: auto !important;
+  bottom: 1.5rem !important;
+}
+
+.elfsight-chatbot-anchor iframe {
+  position: fixed !important;
+}
+
 /* Smooth cards */
 .card {
   @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300;

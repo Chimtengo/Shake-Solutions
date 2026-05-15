@@ -2,8 +2,10 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import ClientsMarquee from '@/components/ClientsMarquee'
 import { portfolioProjects } from '@/data/portfolioProjects'
+import { services as allServices } from '@/data/services'
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -79,57 +81,7 @@ export default function HomePage() {
     }
   ]
 
-  const services = [
-    {
-      imageSrc: '/images/services/web-system-development-placeholder.jpg',
-      imageAlt: 'Web and system development service image',
-      title: 'Web & System Development',
-      description: 'Custom web applications and systems built with the latest technologies including HTML, PHP, WordPress, and ASP.Net.',
-      link: '/services'
-    },
-    {
-      imageSrc: '/images/services/networking-solutions-placeholder.jpg',
-      imageAlt: 'Networking solutions service image',
-      title: 'Networking Solutions',
-      description: 'Complete LAN, WAN, and virtualization solutions for Windows Server and Linux environments.',
-      link: '/services'
-    },
-    {
-      imageSrc: '/images/services/web-hosting-services-placeholder.jpg',
-      imageAlt: 'Web hosting service image',
-      title: 'Web Hosting',
-      description: 'Reliable hosting with 0% downtime, free SSL, and .mw domain registration as an SNDP-accredited vendor.',
-      link: '/services'
-    },
-    {
-      imageSrc: '/images/services/digital-marketing-placeholder.jpg',
-      imageAlt: 'Digital marketing service image',
-      title: 'Digital Marketing',
-      description: 'SEO optimization, social media marketing, and strategies to boost your online presence.',
-      link: '/services'
-    },
-    {
-      imageSrc: '/images/services/graphics-designing-placeholder.jpg',
-      imageAlt: 'Graphics design service image',
-      title: 'Graphics Design',
-      description: 'Professional logos, branding, and social media graphics that bring your ideas to life.',
-      link: '/services'
-    },
-    {
-      imageSrc: '/images/services/customer-support-placeholder.jpg',
-      imageAlt: 'Customer support service image',
-      title: '24/7 Customer Support',
-      description: 'Free round-the-clock support for all clients with dedicated assistance and rapid response.',
-      link: '/services'
-    }
-  ]
-
-  const stats = [
-    { number: '10+', label: 'Years Experience' },
-    { number: '100+', label: 'Happy Clients' },
-    { number: '0%', label: 'Downtime' },
-    { number: '24/7', label: 'Support' }
-  ]
+  const featuredServices = allServices.slice(0, 3)
 
   const testimonials = [
     {
@@ -251,9 +203,9 @@ export default function HomePage() {
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/services" className="inline-block bg-[var(--brand-accent)] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[var(--brand-accent)]/90 transition-all duration-300 hover:scale-105 shadow-lg">
+              <Link href="/services" className="inline-block bg-[var(--brand-accent)] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[var(--brand-accent)]/90 transition-all duration-300 hover:scale-105 shadow-lg">
                 {heroMessages[currentSlide].cta}
-              </a>
+              </Link>
               <a href="/contact" className="inline-block bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-[var(--brand-dark)] transition-all duration-300 hover:scale-105">
                 Contact Us
               </a>
@@ -279,22 +231,6 @@ export default function HomePage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
-      </section>
-
-      {/* Stats Section */}
-      <section className="bg-gradient-to-br from-[var(--brand-dark)] to-[var(--brand-mid)] py-20 relative z-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, idx) => (
-              <motion.div key={idx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} className="text-center">
-                <div className="text-4xl md:text-5xl font-black text-[var(--brand-accent)] mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-white/80 text-sm md:text-base">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
       </section>
 
       <section className="py-20">
@@ -361,16 +297,16 @@ export default function HomePage() {
       <section ref={sectionRef} className="max-w-7xl mx-auto px-6 py-24">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isVisible ? { opacity: 1, y: 0 } : {}} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-[var(--brand-dark)] mb-4">
-            Our <span className="text-[var(--brand-accent)]">Services</span>
+            Featured <span className="text-[var(--brand-accent)]">Services</span>
           </h2>
           <p className="text-slate-600 max-w-2xl mx-auto text-lg">
-            Comprehensive IT solutions designed to help your business thrive in the digital age
+            A quick look at the core solutions we deliver most often
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, idx) => (
-            <motion.div key={idx} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} whileHover={{ y: -8 }} className="card p-8 group cursor-pointer">
+          {featuredServices.map((service, idx) => (
+            <motion.article key={service.slug} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} whileHover={{ y: -8 }} className="card p-8 group cursor-pointer">
               <div className="mb-6 overflow-hidden rounded-2xl group-hover:scale-110 transition-transform duration-300">
                 <Image
                   src={service.imageSrc}
@@ -388,20 +324,20 @@ export default function HomePage() {
               <p className="text-slate-600 mb-6 leading-relaxed">
                 {service.description}
               </p>
-              <a href={service.link} className="inline-flex items-center gap-2 text-[var(--brand-accent)] font-semibold hover:gap-3 transition-all">
+              <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 text-[var(--brand-accent)] font-semibold hover:gap-3 transition-all">
                 Learn More
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </a>
-            </motion.div>
+              </Link>
+            </motion.article>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <a href="/services" className="inline-block bg-[var(--brand-accent)] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[var(--brand-accent)]/90 transition-all duration-300 hover:scale-105 shadow-lg">
+          <Link href="/services" className="inline-block bg-[var(--brand-accent)] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[var(--brand-accent)]/90 transition-all duration-300 hover:scale-105 shadow-lg">
             View All Services
-          </a>
+          </Link>
         </div>
       </section>
 
