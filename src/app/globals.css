@@ -49,6 +49,34 @@ textarea {
   position: fixed !important;
 }
 
+.whatsapp-pulse::before,
+.whatsapp-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -0.65rem;
+  z-index: -1;
+  border-radius: 9999px;
+  background: rgba(22, 163, 74, 0.24);
+  animation: whatsapp-pulse 2.4s ease-out infinite;
+}
+
+.whatsapp-pulse::after {
+  animation-delay: 0.7s;
+}
+
+@keyframes whatsapp-pulse {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.88);
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.22);
+  }
+}
+
 /* Smooth cards */
 .card {
   @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300;

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import PageHeader from '@/components/PageHeader'
 import { createExcerpt, formatDate, formatViews, getPublishedArticles } from '@/lib/news'
@@ -46,10 +47,13 @@ export default async function NewsPage({ searchParams }) {
                 <Link href={`/news/${article.slug}`} className="grid md:grid-cols-[280px_1fr]">
                   <div className="relative min-h-56 bg-slate-100 md:min-h-full">
                     {article.cover_image ? (
-                      <img
+                      <Image
                         src={article.cover_image}
                         alt={`${article.title} cover image`}
-                        className="h-full min-h-56 w-full object-contain p-2"
+                        fill
+                        sizes="(min-width: 768px) 280px, 100vw"
+                        className="object-contain p-2"
+                        unoptimized
                       />
                     ) : (
                       <div className="flex h-full min-h-56 items-center justify-center bg-gradient-to-br from-[var(--brand-dark)] via-[var(--brand-mid)] to-[var(--brand-accent)] px-8 text-center text-4xl font-black text-white/25">

@@ -49,8 +49,8 @@ export const metadata = {
     }
   },
   icons: {
-    icon: '/images/logo.png',
-    apple: '/images/logo.png'
+    icon: '/images/favicon-logo.png.png',
+    apple: '/images/favicon-logo.png.png'
   }
 }
 

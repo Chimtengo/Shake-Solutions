@@ -24,6 +24,18 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 Until Supabase is connected, `/news` displays fallback demo articles.
 Until Supabase is connected, `/vacancies` displays fallback demo vacancies.
 
+## Contact Form EmailJS Setup
+
+The contact form sends email through EmailJS. Add these values to `.env.local`:
+
+```env
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your-emailjs-service-id
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your-emailjs-template-id
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your-emailjs-public-key
+```
+
+Your EmailJS template can use these fields: `from_name`, `from_email`, `phone`, `subject`, `message`, and `to_name`.
+
 ## Getting Started
 
 First, run the development server:

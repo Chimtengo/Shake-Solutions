@@ -41,6 +41,8 @@ export default async function ServiceDetailPage({ params }) {
   const relatedServices = services
     .filter((item) => item.slug !== service.slug)
     .slice(0, 3)
+  const overviewImageSrc = service.overviewImageSrc || service.imageSrc
+  const overviewImageAlt = service.overviewImageAlt || service.imageAlt
 
   const serviceJsonLd = {
     '@context': 'https://schema.org',
@@ -69,13 +71,25 @@ export default async function ServiceDetailPage({ params }) {
         }}
       />
 
-      <section className="bg-gradient-to-r from-[var(--brand-dark)] to-[var(--brand-mid)] text-white py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="relative overflow-hidden bg-[var(--brand-dark)] py-20 text-white">
+        <Image
+          src={service.imageSrc}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          quality={75}
+          className="object-cover"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-[var(--brand-dark)]/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--brand-dark)]/75 via-[var(--brand-dark)]/45 to-[var(--brand-mid)]/20" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
           <Link href="/services" className="mb-8 inline-flex text-sm font-semibold text-white/80 transition hover:text-white">
             Back to Services
           </Link>
-          <div className="grid gap-10 lg:grid-cols-[1fr_460px] lg:items-center">
-            <div>
+          <div className="max-w-4xl">
               <p className="text-sm font-semibold uppercase tracking-wide text-[var(--brand-accent)]">
                 Shake Solutions Service
               </p>
@@ -93,19 +107,6 @@ export default async function ServiceDetailPage({ params }) {
               >
                 {service.ctaLabel}
               </a>
-            </div>
-
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/10 shadow-2xl">
-              <Image
-                src={service.imageSrc}
-                alt={service.imageAlt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 460px, 100vw"
-                quality={70}
-                className="object-cover"
-              />
-            </div>
           </div>
         </div>
       </section>
@@ -145,6 +146,19 @@ export default async function ServiceDetailPage({ params }) {
                 </ul>
               </div>
             </div>
+
+            {overviewImageSrc && (
+              <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-2xl bg-slate-100 shadow-sm">
+                <Image
+                  src={overviewImageSrc}
+                  alt={overviewImageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 760px, 100vw"
+                  quality={75}
+                  className="object-cover"
+                />
+              </div>
+            )}
           </article>
 
           <aside className="space-y-6 lg:sticky lg:top-32 lg:self-start">

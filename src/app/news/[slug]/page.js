@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { formatDate, formatViews, getArticleBySlug, getPublishedArticles } from '@/lib/news'
@@ -102,11 +103,14 @@ export default async function NewsArticlePage({ params }) {
         <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
           <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             {article.cover_image ? (
-              <div className="bg-slate-100 px-3 py-3 md:px-5 md:py-5">
-                <img
+              <div className="relative min-h-72 bg-slate-100 px-3 py-3 md:min-h-[560px] md:px-5 md:py-5">
+                <Image
                   src={article.cover_image}
                   alt={`${article.title} cover image`}
-                  className="mx-auto max-h-[560px] w-full rounded-xl object-contain"
+                  fill
+                  sizes="(min-width: 1024px) 836px, 100vw"
+                  className="object-contain p-3 md:p-5"
+                  unoptimized
                 />
               </div>
             ) : (

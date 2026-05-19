@@ -3,13 +3,14 @@ export const siteUrl = 'https://www.shakesolutions.net'
 export const siteName = 'Shake Solutions'
 
 export const defaultDescription =
-  'Shake Solutions provides web development, web hosting, networking, digital marketing, graphics design, CCTV installation, and ICT support in Malawi.'
+  'Shake Solutions provides web development, web hosting, VPS hosting, networking, digital marketing, graphics design, CCTV installation, and ICT support in Malawi.'
 
 export const defaultKeywords = [
   'Shake Solutions',
   'ICT solutions Malawi',
   'web development Malawi',
   'web hosting Malawi',
+  'VPS hosting Malawi',
   'domain registration Malawi',
   'digital marketing Malawi',
   'networking solutions Malawi',
@@ -94,4 +95,3 @@ export function pageMetadata({ title, description, path = '/', images = ['/image
     }
   }
 }
-

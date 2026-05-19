@@ -4,7 +4,7 @@ import { services } from '@/data/services'
 export const metadata = pageMetadata({
   title: 'ICT Services in Malawi',
   description:
-    'Explore Shake Solutions services including web development, web hosting, reseller hosting, networking, digital marketing, graphics design, GPS fleet tracking, enterprise storage, customer support, and CCTV installation.',
+    'Explore Shake Solutions services including web development, web hosting, VPS hosting, reseller hosting, networking, digital marketing, graphics design, GPS fleet tracking, enterprise storage, customer support, and CCTV installation.',
   path: '/services',
   images: ['/images/services/web-system-development-placeholder.jpg']
 })

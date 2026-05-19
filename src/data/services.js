@@ -75,7 +75,10 @@ export const webHostingPackages = [
     orderHref: '/contact',
     ctaLabel: 'Request Hosting',
     features: ['Free SSL Certificate', 'Unlimited Domains', 'Unlimited Disk Space', 'Unlimited Email Accounts', 'Unlimited Bandwidth', 'CPanel Included', 'Priority 24/7 Support']
-  },
+  }
+]
+
+export const vpsHostingPackages = [
   {
     name: 'VPS Basic',
     price: 'MK 30,000',
@@ -378,14 +381,32 @@ export const services = [
       'Competitive website and email hosting at affordable prices. As an SNDP-accredited vendor, we are certified for .mw domain registration.',
     details:
       'Our hosting packages support business websites, email, databases, SSL, domain registration, and dependable support for teams that need their online presence to stay available.',
-    features: ['Shared Hosting', 'VPS Hosting', 'Domain Registration', '99.9% Uptime Guarantee'],
+    features: ['Shared Hosting', 'Email Hosting', 'Domain Registration', '99.9% Uptime Guarantee'],
     benefits: ['Free SSL options', 'Business email hosting', 'Domain registration support', '24/7 technical assistance'],
     ctaLabel: 'View Packages',
     ctaHref: '#packages',
-    packagesTitle: 'Web Hosting & VPS Packages',
+    packagesTitle: 'Web Hosting Packages',
     packagesDescription:
-      'Select annual web hosting for websites and email, or monthly VPS hosting when you need dedicated server resources and root access.',
+      'Select annual web hosting for business websites, email, databases, SSL, and dependable support.',
     packages: webHostingPackages
+  },
+  {
+    slug: 'vps-hosting',
+    imageSrc: '/images/services/vps-hosting.svg',
+    imageAlt: 'VPS hosting service illustration',
+    title: 'VPS Hosting',
+    description:
+      'Virtual private server packages for businesses that need dedicated resources, SSD storage, root access, and scalable monthly hosting.',
+    details:
+      'Our VPS hosting gives growing websites, applications, and business systems dedicated server resources without the cost of managing physical hardware. Choose the CPU, RAM, storage, and transfer level that fits your workload, with root access and local support from Shake Solutions.',
+    features: ['Dedicated VPS Resources', 'SSD Storage', 'Root Access', '10 Gbps Network'],
+    benefits: ['More control than shared hosting', 'Predictable monthly pricing', 'Scalable server capacity', 'Free setup support'],
+    ctaLabel: 'View VPS Packages',
+    ctaHref: '#packages',
+    packagesTitle: 'VPS Hosting Packages',
+    packagesDescription:
+      'Choose a monthly VPS package when you need dedicated CPU, RAM, SSD storage, transfer allowance, and root access for your website or application.',
+    packages: vpsHostingPackages
   },
   {
     slug: 'reseller-hosting',

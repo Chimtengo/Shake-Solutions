@@ -81,7 +81,14 @@ export default function HomePage() {
     }
   ]
 
-  const featuredServices = allServices.slice(0, 3)
+  const featuredServiceSlugs = [
+    'web-system-development',
+    'web-hosting-services',
+    'reseller-hosting'
+  ]
+  const featuredServices = featuredServiceSlugs
+    .map((slug) => allServices.find((service) => service.slug === slug))
+    .filter(Boolean)
 
   const testimonials = [
     {
@@ -306,31 +313,33 @@ export default function HomePage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredServices.map((service, idx) => (
-            <motion.article key={service.slug} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} whileHover={{ y: -8 }} className="card p-8 group cursor-pointer">
-              <div className="mb-6 overflow-hidden rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                <Image
-                  src={service.imageSrc}
-                  alt={service.imageAlt}
-                  width={640}
-                  height={360}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  quality={70}
-                  className="h-40 w-full object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-[var(--brand-dark)] mb-4 group-hover:text-[var(--brand-accent)] transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-slate-600 mb-6 leading-relaxed">
-                {service.description}
-              </p>
-              <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 text-[var(--brand-accent)] font-semibold hover:gap-3 transition-all">
-                Learn More
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </motion.article>
+            <Link key={service.slug} href={`/services/${service.slug}`} className="group block h-full">
+              <motion.article initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} whileHover={{ y: -8 }} className="card h-full cursor-pointer p-8">
+                <div className="mb-6 overflow-hidden rounded-2xl">
+                  <Image
+                    src={service.imageSrc}
+                    alt={service.imageAlt}
+                    width={640}
+                    height={360}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    quality={70}
+                    className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-[var(--brand-dark)] mb-4 group-hover:text-[var(--brand-accent)] transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-slate-600 mb-6 leading-relaxed">
+                  {service.description}
+                </p>
+                <span className="inline-flex items-center gap-2 text-[var(--brand-accent)] font-semibold transition-all group-hover:gap-3">
+                  Learn More
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </motion.article>
+            </Link>
           ))}
         </div>
 
@@ -355,7 +364,11 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {whyChooseUs.map((item, idx) => (
               <motion.div key={idx} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }} className="card p-8 text-center group hover:border-[var(--brand-accent)] hover:border-2 transition-all duration-300">
-                <div className="mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                <motion.div
+                  className="mb-4 flex justify-center transition-transform duration-300 group-hover:scale-110"
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut', delay: idx * 0.15 }}
+                >
                   {item.iconSrc ? (
                     <Image
                       src={item.iconSrc}
@@ -367,7 +380,7 @@ export default function HomePage() {
                   ) : (
                     <span className="text-6xl">{item.icon}</span>
                   )}
-                </div>
+                </motion.div>
                 <h3 className="text-xl font-bold text-[var(--brand-dark)] mb-3 group-hover:text-[var(--brand-accent)] transition-colors">
                   {item.title}
                 </h3>
@@ -410,8 +423,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[var(--brand-dark)] to-[var(--brand-mid)] py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative overflow-hidden bg-[url('/images/company-image.jpg')] bg-cover bg-center bg-fixed py-24">
+        <div className="absolute inset-0 bg-[var(--brand-dark)]/80"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Ready to Transform Your Business?
