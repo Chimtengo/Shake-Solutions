@@ -99,6 +99,9 @@ export default async function NewsArticlePage({ params }) {
         </div>
       </section>
 
+
+
+
       <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
           <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">

@@ -1,4 +1,6 @@
 export const resellerPackagesUrl = 'https://www.shakesolutions.net/billing/store/reseller-webhosting-packages'
+export const webHostingPackagesUrl = 'https://billing.shakesolutions.net/store/webhosting-linux'
+export const vpsHostingPackagesUrl = 'https://billing.shakesolutions.net/store/hosting-packages'
 
 export const webDevelopmentPackages = [
   {
@@ -48,32 +50,36 @@ export const webHostingPackages = [
     name: 'Basic Hosting',
     price: 'MK 90,000',
     period: '/year',
-    orderHref: '/contact',
-    ctaLabel: 'Request Hosting',
+    orderHref: `${webHostingPackagesUrl}/basic-hosting-package`,
+    external: true,
+    ctaLabel: 'Order Now',
     features: ['Free SSL Certificate', '1 Domain', '5GB Disk Space', '10 Email Accounts', '5GB Bandwidth', '1 Database', 'Free 24/7 Support']
   },
   {
     name: 'Standard Hosting',
     price: 'MK 150,000',
     period: '/year',
-    orderHref: '/contact',
-    ctaLabel: 'Request Hosting',
+    orderHref: `${webHostingPackagesUrl}/standard-hosting-package`,
+    external: true,
+    ctaLabel: 'Order Now',
     features: ['Free SSL Certificate', '3 Domains', '10GB Disk Space', '50 Email Accounts', '10GB Bandwidth', 'CPanel Included', 'Unlimited Databases']
   },
   {
     name: 'Professional Hosting',
     price: 'MK 240,000',
     period: '/year',
-    orderHref: '/contact',
-    ctaLabel: 'Request Hosting',
+    orderHref: `${webHostingPackagesUrl}/professional-hosting-package`,
+    external: true,
+    ctaLabel: 'Order Now',
     features: ['Free SSL Certificate', '5 Domains', '15GB Disk Space', '100 Email Accounts', '15GB Bandwidth', 'CPanel Included', 'Free 24/7 Support']
   },
   {
-    name: 'Enterprise Hosting',
+    name: 'Ultimate Hosting',
     price: 'MK 500,000',
     period: '/year',
-    orderHref: '/contact',
-    ctaLabel: 'Request Hosting',
+    orderHref: `${webHostingPackagesUrl}/ultimate-hosting-package`,
+    external: true,
+    ctaLabel: 'Order Now',
     features: ['Free SSL Certificate', 'Unlimited Domains', 'Unlimited Disk Space', 'Unlimited Email Accounts', 'Unlimited Bandwidth', 'CPanel Included', 'Priority 24/7 Support']
   }
 ]
@@ -83,32 +89,36 @@ export const vpsHostingPackages = [
     name: 'VPS Basic',
     price: 'MK 30,000',
     period: '/mo',
-    orderHref: '/contact',
-    ctaLabel: 'Request VPS',
+    orderHref: `${vpsHostingPackagesUrl}/basic-vps-package`,
+    external: true,
+    ctaLabel: 'Order Now',
     features: ['1 CPU Core', '2GB RAM', '40GB SSD Storage', '2TB Transfer', '10 Gbps Network', 'Root Access', 'Free Setup']
   },
   {
     name: 'VPS Standard',
     price: 'MK 40,000',
     period: '/mo',
-    orderHref: '/contact',
-    ctaLabel: 'Request VPS',
+    orderHref: `${vpsHostingPackagesUrl}/standard-vps-hosting-package`,
+    external: true,
+    ctaLabel: 'Order Now',
     features: ['1 CPU Core', '4GB RAM', '80GB SSD Storage', '4TB Transfer', '10 Gbps Network', 'Root Access', 'Free Setup']
   },
   {
     name: 'VPS Professional',
     price: 'MK 50,000',
     period: '/mo',
-    orderHref: '/contact',
-    ctaLabel: 'Request VPS',
+    orderHref: vpsHostingPackagesUrl,
+    external: true,
+    ctaLabel: 'Order Now',
     features: ['2 CPU Cores', '6GB RAM', '120GB SSD Storage', '6TB Transfer', '10 Gbps Network', 'Root Access', 'Free Setup']
   },
   {
-    name: 'VPS Enterprise',
+    name: 'VPS Ultimate',
     price: 'MK 60,000',
     period: '/mo',
-    orderHref: '/contact',
-    ctaLabel: 'Request VPS',
+    orderHref: `${vpsHostingPackagesUrl}/ultimate-vps-hosting`,
+    external: true,
+    ctaLabel: 'Order Now',
     features: ['2 CPU Cores', '8GB RAM', '160GB SSD Storage', '8TB Transfer', '10 Gbps Network', 'Root Access', 'Free Setup']
   }
 ]
@@ -116,7 +126,7 @@ export const vpsHostingPackages = [
 export const resellerPackages = [
   {
     name: 'Starter Reseller Package',
-    price: 'MWK23,750.00',
+    price: 'MWK 38,000.00',
     period: '/mo',
     orderHref: `${resellerPackagesUrl}/starter-reseller-package`,
     external: true,
@@ -124,13 +134,13 @@ export const resellerPackages = [
       '50GB Disk Space',
       '1000GB Bandwidth',
       'Unlimited Domains',
-      'MK 600,000.00 Annual Price',
+      'MK 960,000.00 Annual Price',
       'Windows / Linux Hosting Server'
     ]
   },
   {
     name: 'Beginner Reseller Package',
-    price: 'MWK32,500.00',
+    price: 'MWK 52,000.00',
     period: '/mo',
     orderHref: `${resellerPackagesUrl}/beginner-reseller-package`,
     external: true,
@@ -138,13 +148,13 @@ export const resellerPackages = [
       '100GB Disk Space',
       '3000GB Bandwidth',
       'Unlimited Domains',
-      'MK 850,000.00 Annual Price',
+      'MK 1,360,000.00 Annual Price',
       'Windows / Linux Hosting Server'
     ]
   },
   {
     name: 'Expert Reseller Package',
-    price: 'MWK40,000.00',
+    price: 'MWK 64,000.00',
     period: '/mo',
     orderHref: `${resellerPackagesUrl}/expert-reseller-package`,
     external: true,
@@ -152,13 +162,13 @@ export const resellerPackages = [
       '150GB Disk Space',
       '3000GB Bandwidth',
       'Unlimited Domains',
-      'MK 750,000.00 Annual Price',
+      'MK 1,200,000.00 Annual Price',
       'Windows / Linux Hosting Server'
     ]
   },
   {
     name: 'Professional Reseller Package',
-    price: 'MWK70,000.00',
+    price: 'MWK 112,000.00',
     period: '/mo',
     orderHref: `${resellerPackagesUrl}/professional-reseller-package`,
     external: true,
@@ -166,7 +176,7 @@ export const resellerPackages = [
       '250GB Disk Space',
       '4000GB Bandwidth',
       'Unlimited Domains',
-      'MK 980,000.00 / month Annual Price',
+      'MK 1,568,000.00 Annual Price',
       'Windows / Linux Hosting Server'
     ]
   }
@@ -230,6 +240,8 @@ export const digitalMarketingPackages = [
     features: ['Four managed accounts', 'Facebook, Instagram, and LinkedIn support', '3 posts per week', 'Includes holidays', 'Annual option: MWK 3,600,000']
   }
 ]
+
+export const seoPackages = digitalMarketingPackages.filter((plan) => plan.name.startsWith('SEO '))
 
 export const graphicsDesignPrices = [
   { name: 'Logo', price: 'MWK 100,000' },
@@ -410,7 +422,7 @@ export const services = [
   },
   {
     slug: 'reseller-hosting',
-    imageSrc: '/images/services/web-hosting-services-placeholder.jpg',
+    imageSrc: '/images/services/reseller.jpg',
     imageAlt: 'Reseller hosting service image',
     title: 'Reseller Hosting',
     description:
@@ -440,6 +452,24 @@ export const services = [
     packagesDescription:
       'Choose monthly SEO support, social media management, or combine both for a stronger online presence.',
     packages: digitalMarketingPackages
+  },
+  {
+    slug: 'search-engine-optimization',
+    imageSrc: '/images/services/search.jpg',
+    imageAlt: 'Search engine optimization service image',
+    title: 'Search Engine Optimization',
+    description:
+      'SEO services that improve website visibility, search ranking, local discovery, and qualified traffic from people already looking for what you offer.',
+    details:
+      'Shake Solutions helps businesses strengthen their search presence with technical SEO setup, website audits, keyword tracking, Google Search Console, analytics, local business listings, reporting, and ongoing optimisation focused on practical growth.',
+    features: ['Website SEO Audits', 'Keyword Tracking', 'Google Search Console', 'Local SEO'],
+    benefits: ['Improve search visibility', 'Reach higher-intent visitors', 'Track ranking performance', 'Strengthen local discovery'],
+    ctaLabel: 'View SEO Packages',
+    ctaHref: '#packages',
+    packagesTitle: 'Search Engine Optimization Packages',
+    packagesDescription:
+      'Choose monthly SEO support for audits, search tracking, reporting, technical setup, and ongoing optimisation.',
+    packages: seoPackages
   },
   {
     slug: 'graphics-designing',
@@ -489,7 +519,7 @@ export const services = [
   },
   {
     slug: 'gps-fleet-tracking',
-    imageSrc: '/images/services/gps-fleet-tracking.svg',
+    imageSrc: '/images/services/gps-fleet-tracking.jpg',
     imageAlt: 'GPS fleet tracking service illustration',
     title: 'GPS Fleet Tracking',
     description:
@@ -507,7 +537,7 @@ export const services = [
   },
   {
     slug: 'enterprise-storage-services',
-    imageSrc: '/images/services/enterprise-storage-services.svg',
+    imageSrc: '/images/services/enterprise-storage-services.jpg',
     imageAlt: 'Enterprise storage services illustration',
     title: 'Enterprise Storage Services',
     description:

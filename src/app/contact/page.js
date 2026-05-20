@@ -324,6 +324,7 @@ export default function ContactPage() {
                     <option value="reseller-hosting">Reseller Hosting</option>
                     <option value="networking">Networking Solutions</option>
                     <option value="digital-marketing">Digital Marketing</option>
+                    <option value="search-engine-optimization">Search Engine Optimization</option>
                     <option value="support">Technical Support</option>
                     <option value="other">Other Inquiry</option>
                   </select>
