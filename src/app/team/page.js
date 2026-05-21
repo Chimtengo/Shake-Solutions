@@ -49,6 +49,8 @@ export default function TeamPage() {
       <PageHeader
         title="Our Team"
         subtitle="Meet the experienced professionals driving innovation at Shake Solutions"
+        imageSrc="/headers/team.webp"
+        imagePosition="center 36%"
       />
 
       <section className="max-w-7xl mx-auto px-6 py-24">
@@ -114,8 +116,9 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-[var(--brand-dark)] to-[var(--brand-mid)] py-24 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative overflow-hidden bg-[url('/headers/team.webp')] bg-cover bg-center bg-fixed py-24 text-white">
+        <div className="absolute inset-0 bg-[var(--brand-dark)]/80" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

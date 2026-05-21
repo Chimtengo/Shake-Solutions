@@ -52,6 +52,7 @@ export default function ServicesPage() {
       <PageHeader
         title="Our Services"
         subtitle="Comprehensive IT solutions tailored to your business needs"
+        imageSrc="/headers/services.jpeg"
       />
 
       <section id="services-list" ref={sectionRef} className="max-w-7xl mx-auto px-6 py-24 scroll-mt-32">
@@ -159,8 +160,10 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className="bg-gradient-to-br from-[var(--brand-dark)] to-[var(--brand-mid)] rounded-3xl p-12 text-white text-center">
+      <section className="relative overflow-hidden bg-[url('/images/company-image.jpg')] bg-cover bg-center bg-fixed py-24">
+        <div className="absolute inset-0 bg-[var(--brand-dark)]/80" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 text-center text-white">
+          <div className="mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -181,6 +184,7 @@ export default function ServicesPage() {
               </a>
             </div>
           </motion.div>
+          </div>
         </div>
       </section>
     </>

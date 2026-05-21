@@ -52,6 +52,7 @@ export default function AboutPage() {
       <PageHeader
         title="About Shake Solutions"
         subtitle="Building digital excellence in Malawi for over a decade"
+        imageSrc="/headers/about.jpeg"
       />
 
       <section ref={ref1} className="max-w-7xl mx-auto px-6 py-24">
@@ -250,8 +251,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[var(--brand-dark)] to-[var(--brand-mid)] py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative overflow-hidden bg-[url('/headers/about.jpeg')] bg-cover bg-center bg-fixed py-20">
+        <div className="absolute inset-0 bg-[var(--brand-dark)]/80" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

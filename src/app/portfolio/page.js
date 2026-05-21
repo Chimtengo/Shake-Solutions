@@ -156,17 +156,18 @@ export default function PortfolioPage() {
 
 
 
-      <section className="bg-slate-50 py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative overflow-hidden bg-[url('/images/company-image.jpg')] bg-cover bg-center bg-fixed py-24">
+        <div className="absolute inset-0 bg-[var(--brand-dark)]/80" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--brand-dark)] mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Want to See Your Project Here?
             </h2>
-            <p className="text-slate-600 mb-8 text-lg">
+            <p className="text-white/80 mb-8 text-lg">
               Let&apos;s work together to create something amazing for your business.
             </p>
             <a
