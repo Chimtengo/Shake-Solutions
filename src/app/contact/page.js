@@ -364,6 +364,42 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-10 max-w-3xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--brand-accent)]">
+              Find us
+            </p>
+            <h2 className="text-3xl font-bold text-[var(--brand-dark)] md:text-4xl">
+              Visit Shake Solutions
+            </h2>
+            <p className="mt-3 text-slate-600">
+              Unit 11, Maula Mall, Along M1 Road, Lilongwe, Malawi.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm">
+            <iframe
+              title="Shake Solutions location on Google Maps"
+              src="https://www.google.com/maps?q=Shake%20Solutions%2C%20Maula%20Mall%2C%20Lilongwe%2C%20Malawi&ll=-13.985491,33.767358&z=16&output=embed"
+              className="h-[420px] w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+
+          <a
+            href="https://www.google.com/maps/place/Shake+Solutions/@-13.985491,33.767358,16z/data=!4m6!3m5!1s0x1921d36cb3aae421:0xd53380dd980f1045!8m2!3d-13.985491!4d33.7673584!16s%2Fg%2F11fp6gqzsp?hl=en&entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex rounded-lg bg-[var(--brand-accent)] px-6 py-3 font-semibold text-white transition hover:bg-[var(--brand-accent)]/90"
+          >
+            Open in Google Maps
+          </a>
+        </div>
+      </section>
     </>
   )
 }
