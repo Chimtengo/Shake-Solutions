@@ -3,6 +3,16 @@ import { notFound } from 'next/navigation'
 import { absoluteUrl, siteName } from '@/lib/seo'
 import { formatVacancyDate, getPublishedVacancies, getVacancyBySlug } from '@/lib/vacancies'
 
+export const dynamicParams = false
+
+export async function generateStaticParams() {
+  const vacancies = await getPublishedVacancies()
+
+  return vacancies.map((vacancy) => ({
+    slug: vacancy.slug
+  }))
+}
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params
   const vacancy = await getVacancyBySlug(resolvedParams.slug)

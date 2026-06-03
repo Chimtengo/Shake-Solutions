@@ -1,7 +1,14 @@
 import { getSupabaseServerClient, hasSupabaseConfig } from '@/lib/supabase'
+import { fallbackArticles } from '@/data/newsFallback'
 
 const articleFields =
   'id,title,slug,excerpt,content,category,author,cover_image,views,read_time,featured,published,published_at,created_at,updated_at'
+
+function logSupabaseFallback(message) {
+  if (process.env.NODE_ENV === 'development') {
+    console.warn(message)
+  }
+}
 
 export function formatDate(value) {
   if (!value) return 'Unscheduled'
@@ -25,7 +32,7 @@ export function createExcerpt(content = '', length = 150) {
 }
 
 export async function getPublishedArticles() {
-  if (!hasSupabaseConfig) return []
+  if (!hasSupabaseConfig) return fallbackArticles
 
   const supabase = getSupabaseServerClient()
   const { data, error } = await supabase
@@ -35,15 +42,15 @@ export async function getPublishedArticles() {
     .order('published_at', { ascending: false })
 
   if (error) {
-    console.error('Unable to load articles from Supabase:', error.message)
-    return []
+    logSupabaseFallback(`Using fallback articles because Supabase is unavailable: ${error.message}`)
+    return fallbackArticles
   }
 
-  return data || []
+  return data?.length ? data : fallbackArticles
 }
 
 export async function getArticleBySlug(slug) {
-  if (!hasSupabaseConfig) return null
+  if (!hasSupabaseConfig) return fallbackArticles.find((article) => article.slug === slug) || null
 
   const supabase = getSupabaseServerClient()
   const { data, error } = await supabase
@@ -54,9 +61,9 @@ export async function getArticleBySlug(slug) {
     .maybeSingle()
 
   if (error) {
-    console.error('Unable to load article from Supabase:', error.message)
-    return null
+    logSupabaseFallback(`Using fallback article because Supabase is unavailable: ${error.message}`)
+    return fallbackArticles.find((article) => article.slug === slug) || null
   }
 
-  return data
+  return data || fallbackArticles.find((article) => article.slug === slug) || null
 }

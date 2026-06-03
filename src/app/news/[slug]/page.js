@@ -4,6 +4,16 @@ import { notFound } from 'next/navigation'
 import { formatDate, formatViews, getArticleBySlug, getPublishedArticles } from '@/lib/news'
 import { absoluteUrl, siteName } from '@/lib/seo'
 
+export const dynamicParams = false
+
+export async function generateStaticParams() {
+  const articles = await getPublishedArticles()
+
+  return articles.map((article) => ({
+    slug: article.slug
+  }))
+}
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params
   const article = await getArticleBySlug(resolvedParams.slug)

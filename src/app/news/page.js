@@ -10,17 +10,9 @@ export const metadata = pageMetadata({
   path: '/news'
 })
 
-export default async function NewsPage({ searchParams }) {
+export default async function NewsPage() {
   const articles = await getPublishedArticles()
-  const resolvedSearchParams = await searchParams
-  const query = resolvedSearchParams?.q?.trim().toLowerCase() || ''
-  const filteredArticles = query
-    ? articles.filter((article) =>
-        [article.title, article.excerpt, article.content, article.category]
-          .filter(Boolean)
-          .some((value) => value.toLowerCase().includes(query))
-      )
-    : articles
+  const filteredArticles = articles
   const recentArticles = articles.slice(0, 5)
   const featuredArticles = articles.filter((article) => article.featured).slice(0, 5)
   const categories = articles.reduce((items, article) => {
@@ -93,10 +85,10 @@ export default async function NewsPage({ searchParams }) {
             {filteredArticles.length === 0 && (
               <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm">
                 <p className="text-lg font-semibold text-[var(--brand-dark)]">
-                  {query ? 'No articles found.' : 'No news has been posted yet.'}
+                  No news has been posted yet.
                 </p>
                 <p className="mt-2 text-slate-600">
-                  {query ? 'Try another search term or check back soon.' : 'Please check back soon for updates from Shake Solutions.'}
+                  Please check back soon for updates from Shake Solutions.
                 </p>
               </div>
             )}
@@ -109,7 +101,6 @@ export default async function NewsPage({ searchParams }) {
                 <input
                   type="search"
                   name="q"
-                  defaultValue={query}
                   placeholder="Search news"
                   className="min-w-0 flex-1 rounded-lg border border-slate-200 px-4 py-3 outline-none transition focus:border-[var(--brand-accent)] focus:ring-4 focus:ring-[var(--brand-accent)]/10"
                 />

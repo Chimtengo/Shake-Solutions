@@ -9,17 +9,9 @@ export const metadata = pageMetadata({
   path: '/vacancies'
 })
 
-export default async function VacanciesPage({ searchParams }) {
+export default async function VacanciesPage() {
   const vacancies = await getPublishedVacancies()
-  const resolvedSearchParams = await searchParams
-  const query = resolvedSearchParams?.q?.trim().toLowerCase() || ''
-  const filteredVacancies = query
-    ? vacancies.filter((vacancy) =>
-        [vacancy.title, vacancy.department, vacancy.location, vacancy.type, vacancy.excerpt]
-          .filter(Boolean)
-          .some((value) => value.toLowerCase().includes(query))
-      )
-    : vacancies
+  const filteredVacancies = vacancies
   const featuredVacancies = vacancies.filter((vacancy) => vacancy.featured).slice(0, 4)
 
   return (
@@ -73,10 +65,10 @@ export default async function VacanciesPage({ searchParams }) {
             {filteredVacancies.length === 0 && (
               <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm">
                 <p className="text-lg font-semibold text-[var(--brand-dark)]">
-                  {query ? 'No vacancies found.' : 'No vacancies have been posted yet.'}
+                  No vacancies have been posted yet.
                 </p>
                 <p className="mt-2 text-slate-600">
-                  {query ? 'Try another search term or check back soon.' : 'Please check back soon for future opportunities.'}
+                  Please check back soon for future opportunities.
                 </p>
               </div>
             )}
@@ -89,7 +81,6 @@ export default async function VacanciesPage({ searchParams }) {
                 <input
                   type="search"
                   name="q"
-                  defaultValue={query}
                   placeholder="Search roles"
                   className="min-w-0 flex-1 rounded-lg border border-slate-200 px-4 py-3 outline-none transition focus:border-[var(--brand-accent)] focus:ring-4 focus:ring-[var(--brand-accent)]/10"
                 />

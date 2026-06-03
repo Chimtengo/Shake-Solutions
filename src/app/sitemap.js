@@ -3,6 +3,8 @@ import { absoluteUrl, publicRoutes } from '@/lib/seo'
 import { getPublishedVacancies } from '@/lib/vacancies'
 import { services } from '@/data/services'
 
+export const dynamic = 'force-static'
+
 export default async function sitemap() {
   const now = new Date()
   const [articles, vacancies] = await Promise.all([
